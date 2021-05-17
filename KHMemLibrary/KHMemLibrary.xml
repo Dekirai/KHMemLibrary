@@ -4,18 +4,6 @@
         <name>KHMemLibrary</name>
     </assembly>
     <members>
-        <member name="M:KHMemLibrary.KH2FM.FieldBGM(System.Int32)">
-            <summary>
-            Sets a new BGM for the fields. Takes effect after switching areas.
-            </summary>
-            <param name="BGM">BGM ID</param>
-        </member>
-        <member name="M:KHMemLibrary.KH2FM.BattleBGM(System.Int32)">
-            <summary>
-            Sets a new BGM for battles. Takes effect after switching areas.
-            </summary>
-            <param name="BGM">BGM ID</param>
-        </member>
         <member name="M:KHMemLibrary.KH2FM.AntiPoints(System.Int32)">
             <summary>
             Change the amount of anti points you currently have.
@@ -102,9 +90,14 @@
             </summary>
             <param name="value"></param>
         </member>
-        <member name="M:KHMemLibrary.KH2FM.RandomizeBGM">
+        <member name="M:KHMemLibrary.KH2FM.RandomizeFieldBGM">
             <summary>
-            Shuffles the BGM. Useful for Field- and Battle BGM.
+            Shuffles the BGM for fields.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.RandomizeBattleBGM">
+            <summary>
+            Shuffles the BGM for battles.
             </summary>
         </member>
         <member name="M:KHMemLibrary.KH2FM.isMapLoaded">
@@ -179,9 +172,15 @@
             Returns the current amount of munny you have.
             </summary>
         </member>
-        <member name="M:KHMemLibrary.KH2FM.FieldBGMTest(KHMemLibrary.KH2FMLib.BGM)">
+        <member name="M:KHMemLibrary.KH2FM.FieldBGM(KHMemLibrary.KH2FMLib.BGM)">
             <summary>
             Sets a new BGM for the fields. Takes effect after switching areas.
+            </summary>
+            <param name="bgm">BGM ID</param>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.BattleBGM(KHMemLibrary.KH2FMLib.BGM)">
+            <summary>
+            Sets a new BGM for the battles. Takes effect after switching areas.
             </summary>
             <param name="bgm">BGM ID</param>
         </member>
