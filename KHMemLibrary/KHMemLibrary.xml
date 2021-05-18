@@ -4,6 +4,32 @@
         <name>KHMemLibrary</name>
     </assembly>
     <members>
+        <member name="M:KHMemLibrary.KH1FM.RefillHP">
+            <summary>
+            Refills Sora's HP to his current max HP.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH1FM.RefillMP">
+            <summary>
+            Refills Sora's MP to his current max MP.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH1FM.SaveMenu">
+            <summary>
+            Opens the save menu.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH1FM.PartyMenu">
+            <summary>
+            Opens the party menu.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH1FM.GameSpeed(System.Single)">
+            <summary>
+            Change the speed of the game.
+            </summary>
+            <param name="value">Default is 1</param>
+        </member>
         <member name="M:KHMemLibrary.KH2FM.AntiPoints(System.Int32)">
             <summary>
             Change the amount of anti points you currently have.
@@ -259,17 +285,17 @@
             Unlocks the FPS.
             </summary>
         </member>
-        <member name="F:KHMemLibrary.KH2FMLib.FPSValue.Thirty">
+        <member name="F:KHMemLibrary.KH2FMLib.FPSValue.FPS30">
             <summary>
             Limits the FPS to 30 FPS.
             </summary>
         </member>
-        <member name="F:KHMemLibrary.KH2FMLib.FPSValue.Sixty">
+        <member name="F:KHMemLibrary.KH2FMLib.FPSValue.FPS60">
             <summary>
             Limits the FPS to 60 FPS.
             </summary>
         </member>
-        <member name="F:KHMemLibrary.KH2FMLib.FPSValue.Onehundredtwenty">
+        <member name="F:KHMemLibrary.KH2FMLib.FPSValue.FPS120">
             <summary>
             Limits the FPS to 120 FPS.
             </summary>
