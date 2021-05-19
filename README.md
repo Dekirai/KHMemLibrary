@@ -5,7 +5,7 @@
 ## First words
 Please note that this project is still in it's early stage and far from being done.</br>
 I try to make this library as userfriendly as possible, so even a newbie can work with it!</br>
-For a complete library breakdown, don't mind to look at the [Wiki](https://github.com/Dekirai/KHMemLibrary/wiki/Functions)!
+For a complete library breakdown, don't mind look at the [Wiki](https://github.com/Dekirai/KHMemLibrary/wiki/Functions)
 
 ## Requirements
 
@@ -39,11 +39,13 @@ For a complete library breakdown, don't mind to look at the [Wiki](https://githu
         }
     }
 
+## Credits
+Huge thanks to anyone that contributed to the Library in any way or I took advantage of.</br>
+
+ - Denho (denho#3759)
+ - TopazTK (TopazTK#5514, [GitHub](https://github.com/Topaz-Reality))
+ - 1234567890Num (1234567890num#6827, [GitHub](https://github.com/1234567890num))
+
 ## Packages used to make it work
 
  - [memory.dll](https://github.com/erfg12/memory.dll)
-
-## To-Do List
-
-For now the library is focused only on Kingdom Hearts II.</br>
-But my plan is to also add support for Kingdom Hearts I and Kingdom Hearts: Birth by Sleep.
