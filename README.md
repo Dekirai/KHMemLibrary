@@ -9,7 +9,7 @@ For a complete library breakdown, don't mind look to at the [Wiki](https://githu
 
 ## Requirements
 
- - Kingdom Hearts of your choice on your PC
+ - Kingdom Hearts 1, 2 or BBS on your PC
  - [.NET 5](https://dotnet.microsoft.com/download/dotnet) or higher
 
 ## How to install the library
