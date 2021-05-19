@@ -30,6 +30,13 @@
             </summary>
             <param name="value">Default is 1</param>
         </member>
+        <member name="M:KHMemLibrary.KH1FM.TriggerWarp(KHMemLibrary.KH1FMLib.WorldID,System.Byte)">
+            <summary>
+            Trigger a custom warp.
+            </summary>
+            <param name="world"></param>
+            <param name="spawnpoint"></param>
+        </member>
         <member name="M:KHMemLibrary.KH2FM.AntiPoints(System.Int32)">
             <summary>
             Change the amount of anti points you currently have.
@@ -253,6 +260,21 @@
         <member name="M:KHMemLibrary.KH2FM.RemoveWeaponGoofy(KHMemLibrary.KH2FMLib.Shield)">
             <summary>
             Removes a weapon from your inventory for Goofy.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.SetAbility(KHMemLibrary.KH2FMLib.AbilitySlot,KHMemLibrary.KH2FMLib.Ability)">
+            <summary>
+            Sets an ability to a slot of your choice.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.SetArmor(KHMemLibrary.KH2FMLib.ArmorSlot,KHMemLibrary.KH2FMLib.ArmorID)">
+            <summary>
+            Sets an armor to a slot of your choice.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.SetAccessory(KHMemLibrary.KH2FMLib.AccessorySlot,KHMemLibrary.KH2FMLib.AccessoryID)">
+            <summary>
+            Sets an accessory to a slot of your choice.
             </summary>
         </member>
         <member name="M:KHMemLibrary.KH2FM.ModifyConsumable(KHMemLibrary.KH2FMLib.Consumable,System.Int32)">

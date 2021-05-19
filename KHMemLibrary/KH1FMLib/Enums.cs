@@ -31,4 +31,23 @@ namespace KHMemLibrary.KH1FMLib
         OneWingedAngel = 0x2DE5ECF,
         UltimaWeapon = 0x2DE5ECD
     }
+
+    public enum WorldID
+    {
+        DiveIntoTheHeart = 0,
+        DestinyIslands = 1,
+        DisneyCastle = 2,
+        TraverseTown = 3,
+        Wonderland = 4,
+        DeepJungle = 5,
+        HundredAcreWood = 6,
+        Agrabah = 8,
+        Atlantica = 9,
+        HalloweenTown = 10,
+        OlympusColiseum = 11,
+        Monstro = 12,
+        Neverland = 13,
+        HollowBastion = 15,
+        EndOfTheWorld = 16
+    }
 }

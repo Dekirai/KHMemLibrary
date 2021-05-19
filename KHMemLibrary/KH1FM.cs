@@ -66,5 +66,20 @@ namespace KHMemLibrary
             GetPID();
             memory.WriteMemory($"{process}+233C24C", "float", $"{value}");
         }
+
+        /// <summary>
+        /// Trigger a custom warp.
+        /// </summary>
+        /// <param name="world"></param>
+        /// <param name="spawnpoint"></param>
+        public void TriggerWarp(WorldID world, byte spawnpoint)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+233CB70", "byte", $"{(int)world:X2}");
+            memory.WriteMemory($"{process}+233CB74", "byte", $"0x{spawnpoint:X2}");
+            memory.WriteMemory($"{process}+22E86E0", "byte", $"0x0A");
+            memory.WriteMemory($"{process}+233C240", "byte", $"0x05");
+            memory.WriteMemory($"{process}+22E86DC", "byte", $"0x02");
+        }
     }
 }

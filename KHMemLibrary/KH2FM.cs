@@ -476,6 +476,39 @@ namespace KHMemLibrary
         }
 
         /// <summary>
+        /// Sets an ability to a slot of your choice.
+        /// </summary>
+        public void SetAbility(AbilitySlot slot, Ability ability)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)ability & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)ability & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
+        /// Sets an armor to a slot of your choice.
+        /// </summary>
+        public void SetArmor(ArmorSlot slot, ArmorID armor)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)armor & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)armor & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
+        /// Sets an accessory to a slot of your choice.
+        /// </summary>
+        public void SetAccessory(AccessorySlot slot, AccessoryID accessory)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)accessory & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)accessory & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
         /// Modifies the stock of consumables. Maximum is 255.
         /// </summary>
         public void ModifyConsumable(Consumable item, int value)

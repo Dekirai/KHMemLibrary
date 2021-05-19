@@ -106,6 +106,22 @@
         Slot79 = 0x9A9650,
     }
 
+    public enum ArmorSlot
+    {
+        Slot01 = 0x9A9574,
+        Slot02 = 0x9A9576,
+        Slot03 = 0x9A9578,
+        Slot04 = 0x9A957A
+    }
+
+    public enum AccessorySlot
+    {
+        Slot01 = 0x9A9584,
+        Slot02 = 0x9A9586,
+        Slot03 = 0x9A9588,
+        Slot04 = 0x9A958A
+    }
+
     public enum Ability
     {
         None = 0x0000,
@@ -811,6 +827,81 @@
         DrawRing = 0x9AA62A,
         FullBloomPlus = 0x9AA62B,
         ExecutivesRing = 0x9AA725
+    }
+
+    public enum ArmorID
+    {
+        ElvenBandanna = 0x4300,
+        DivineBandanna = 0x4400,
+        ProtectBelt = 0x4E00,
+        GaiaBelt = 0x4F00,
+        PowerBand = 0x4500,
+        BusterBand = 0x4600,
+        CosmicBelt = 0x6F00,
+        FireBangle = 0xAD00,
+        FiraBangle = 0xAE00,
+        FiragaBangle = 0xC500,
+        FiragunBangle = 0x1C01,
+        BlizzardArmlet = 0x1E01,
+        BlizzaraArmlet = 0x1F01,
+        BlizzagaArmlet = 0x2001,
+        BlizzagunArmlet = 0x2301,
+        ThunderTrinket = 0x2301,
+        ThundaraTrinket = 0x2401,
+        ThundagaTrinket = 0x2501,
+        ThundagunTrinket = 0x2601,
+        ShockCharm = 0x8400,
+        ShockCharmPlus = 0x8500,
+        ShadowAnklet = 0x2801,
+        DarkAnklet = 0x2901,
+        MidnightAnklet = 0x2A01,
+        ChaosAnklet = 0x2B01,
+        ChampionBelt = 0x3101,
+        AbasChain = 0x2D01,
+        AegisChain = 0x2E01,
+        Acrisius = 0x2F01,
+        AcrisiusPlus = 0x3301,
+        CosmicChain = 0x3401,
+        PetiteRibbon = 0x3201,
+        Ribbon = 0x3001,
+        GrandRibbon = 0x9D00
+    }
+
+    public enum AccessoryID
+    {
+        AbilityRing = 0x0800,
+        EngineersRing = 0x0900,
+        TechniciansRing = 0x0A00,
+        SkillRing = 0x2600,
+        SkillfulRing = 0x2700,
+        ExpertsRing = 0x0B00,
+        MastersRing = 0x2200,
+        CosmicRing = 0x3400,
+        ExecutivesRing = 0x5702,
+        SardonyxRing = 0x0C00,
+        TourmalineRing = 0x0D00,
+        AquamarineRing = 0x0E00,
+        GarnetRing = 0x0F00,
+        DiamondRing = 0x1000,
+        SilverRing = 0x1100,
+        GoldRing = 0x1200,
+        PlatinumRing = 0x1300,
+        MythrilRing = 0x1400,
+        OrichalcumRing = 0x1C00,
+        SoldierEarring = 0x2800,
+        FencerEarring = 0x2E00,
+        MageEarring = 0x2F00,
+        SlayerEarring = 0x3000,
+        Medal = 0x3500,
+        MoonAmulet = 0x2300,
+        StarCharm = 0x2400,
+        CosmicArts = 0x3800,
+        ShadowArchive = 0x3900,
+        ShadowArchivePlus = 0x3A00,
+        FullBloom = 0x4000,
+        FullBloomPlus = 0x4200,
+        DrawRing = 0x4100,
+        LuckyRing = 0x3F00
     }
 
     public enum Magic
