@@ -5,7 +5,7 @@
 ## First words
 Please note that this project is still in it's early stage and far from being done.</br>
 I try to make this library as userfriendly as possible, so even a newbie can work with it!</br>
-For a complete library breakdown, don't mind look at the [Wiki](https://github.com/Dekirai/KHMemLibrary/wiki/Functions)
+For a complete library breakdown, don't mind look to at the [Wiki](https://github.com/Dekirai/KHMemLibrary/wiki/Functions)
 
 ## Requirements
 
@@ -44,7 +44,7 @@ Huge thanks to anyone that contributed to the Library in any way or I took advan
 
  - Denho (denho#3759)
  - TopazTK (TopazTK#5514, [GitHub](https://github.com/Topaz-Reality))
- - 1234567890Num (1234567890num#6827, [GitHub](https://github.com/1234567890num))
+ - 1234567890num (1234567890num#6827, [GitHub](https://github.com/1234567890num))
 
 ## Packages used to make it work
 
