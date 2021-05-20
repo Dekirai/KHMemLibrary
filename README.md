@@ -5,7 +5,7 @@
 ## First words
 Please note that this project is still in it's early stage and far from being done.</br>
 I try to make this library as userfriendly as possible, so even a newbie can work with it!</br>
-For a complete library breakdown, don't mind look to at the [Wiki](https://github.com/Dekirai/KHMemLibrary/wiki/Functions)
+For a complete library breakdown, don't mind look to at the [Wiki](https://github.com/Dekirai/KHMemLibrary/wiki).
 
 ## Requirements
 
