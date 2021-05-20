@@ -1,4 +1,5 @@
 
+
 # KHMemLibrary
  A memory library for various Kingdom Hearts games on PC.
 
@@ -9,8 +10,9 @@ For a complete library breakdown, don't mind to look at the [Wiki](https://githu
 
 ## Requirements
 
- - Kingdom Hearts 1, 2 or BBS on your PC
- - [.NET 5](https://dotnet.microsoft.com/download/dotnet) or higher
+ - Kingdom Hearts 1 or Kingdom Hearts 2 on your PC
+ - Visual Studio 2019 (Recommended)
+ - [.NET 5](https://dotnet.microsoft.com/download/dotnet) or greater
 
 ## How to install the library
 
