@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using KHMemLibrary.KH2FMLib;
@@ -36,10 +37,11 @@ namespace KHMemLibrary
         public void Munny(int value)
         {
             GetPID();
-            if (value > 999999)
-                value = 999999;
-            if (value < 0)
-                value = 0;
+            if (value > 9999999 || value < 0)
+            {
+                Console.WriteLine("[KHMemLibrary] Invalid munny value.");
+                return;
+            }
             memory.WriteMemory($"{process}+9A94B0", "int", $"{value}");
         }
 
@@ -181,6 +183,11 @@ namespace KHMemLibrary
         public void Level(int value)
         {
             GetPID();
+            if (value > 99 || value < 0)
+            {
+                Console.WriteLine("[KHMemLibrary] Invalid level value.");
+                return;
+            }
             var EXPTable = new List<int> { 0, 40, 100, 184, 296, 440, 620, 840, 1128, 1492, 1940, 2480, 3120, 3902, 4838, 5940, 7260, 8814, 10618, 12688, 15088, 17838, 20949, 24433, 28302, 32622, 37407, 42671, 48485, 54865, 61886, 69566, 77984, 87160, 97177, 108057, 119887, 132691, 146560, 161520, 177666, 195026, 213699, 233715, 255177, 278117, 302642, 328786, 356660, 386378, 417978, 450378, 483578, 517578, 552378, 587978, 624378, 661578, 699578, 738378, 777978, 818378, 859578, 901578, 944378, 987987, 1032378, 1077578, 1123578, 1170378, 1217978, 1266378, 1315578, 1365578, 1416378, 1467978, 1520378, 1573578, 1627578, 1682378, 1737978, 1794378, 1851578, 1909578, 1968378, 2027978, 2088378, 2149578, 2211578, 2274378, 2337978, 2402378, 2467578, 2533578, 2600378, 2667978, 2736378, 2805578, 2875578 };
             memory.WriteMemory($"{process}+9AA750", "int", $"{EXPTable[value]}");
             string level = value.ToString("X");
@@ -476,9 +483,9 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Sets an ability to a slot of your choice.
+        /// Adds an ability to a slot of your choice.
         /// </summary>
-        public void SetAbility(AbilitySlot slot, Ability ability)
+        public void AddAbility(AbilitySlot slot, Ability ability)
         {
             GetPID();
             var byte1 = (byte)(((int)ability & 0xFF00) >> 8);
@@ -487,9 +494,9 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Sets an armor to a slot of your choice.
+        /// Equip an armor to Sora in a slot of your choice.
         /// </summary>
-        public void SetArmor(ArmorSlot slot, ArmorID armor)
+        public void EquipArmorSora(ArmorSlotSora slot, ArmorID armor)
         {
             GetPID();
             var byte1 = (byte)(((int)armor & 0xFF00) >> 8);
@@ -498,9 +505,53 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Sets an accessory to a slot of your choice.
+        /// Equip an armor to Donald in a slot of your choice.
         /// </summary>
-        public void SetAccessory(AccessorySlot slot, AccessoryID accessory)
+        public void EquipArmorDonald(ArmorSlotDonald slot, ArmorID armor)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)armor & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)armor & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
+        /// Equip an armor to Goofy in a slot of your choice.
+        /// </summary>
+        public void EquipArmorGoofy(ArmorSlotGoofy slot, ArmorID armor)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)armor & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)armor & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
+        /// Equip an accessory to Sora in a slot of your choice.
+        /// </summary>
+        public void EquipAccessorySora(AccessorySlotSora slot, AccessoryID accessory)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)accessory & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)accessory & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
+        /// Equip an accessory to Donald in a slot of your choice.
+        /// </summary>
+        public void EquipAccessoryDonald(AccessorySlotDonald slot, AccessoryID accessory)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)accessory & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)accessory & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
+        /// Equip an accessory to Goofy in a slot of your choice.
+        /// </summary>
+        public void EquipAccessoryGoofy(AccessorySlotGoofy slot, AccessoryID accessory)
         {
             GetPID();
             var byte1 = (byte)(((int)accessory & 0xFF00) >> 8);
@@ -514,10 +565,11 @@ namespace KHMemLibrary
         public void ModifyConsumable(Consumable item, int value)
         {
             GetPID();
-            if (value > 255)
-                value = 255;
-            if (value < 0)
-                value = 0;
+            if (value > 255 || value < 0)
+            {
+                Console.WriteLine("[KHMemLibrary] Invalid quantity value.");
+                return;
+            }
             memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
@@ -527,10 +579,11 @@ namespace KHMemLibrary
         public void ModifyKeyItem(KeyItem item, int value)
         {
             GetPID();
-            if (value > 255)
-                value = 255;
-            if (value < 0)
-                value = 0;
+            if (value > 255 || value < 0)
+            {
+                Console.WriteLine("[KHMemLibrary] Invalid quantity value.");
+                return;
+            }
             memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
@@ -540,10 +593,11 @@ namespace KHMemLibrary
         public void ModifyMaterial(Material item, int value)
         {
             GetPID();
-            if (value > 255)
-                value = 255;
-            if (value < 0)
-                value = 0;
+            if (value > 255 || value < 0)
+            {
+                Console.WriteLine("[KHMemLibrary] Invalid quantity value.");
+                return;
+            }
             memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
@@ -554,9 +608,9 @@ namespace KHMemLibrary
         {
             GetPID();
             memory.WriteMemory($"{process}+{(int)world:X8}", "byte", $"{(int)main:X2}");
-            memory.WriteMemory($"{process}+{(int)world+1:X8}", "byte", $"{(int)first:X2}");
-            memory.WriteMemory($"{process}+{(int)world+2:X8}", "byte", $"{(int)second:X2}");
-            memory.WriteMemory($"{process}+{(int)world+3:X8}", "byte", $"{(int)third:X2}");
+            memory.WriteMemory($"{process}+{(int)world + 1:X8}", "byte", $"{(int)first:X2}");
+            memory.WriteMemory($"{process}+{(int)world + 2:X8}", "byte", $"{(int)second:X2}");
+            memory.WriteMemory($"{process}+{(int)world + 3:X8}", "byte", $"{(int)third:X2}");
         }
     }
 }

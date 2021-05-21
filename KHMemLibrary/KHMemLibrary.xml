@@ -262,19 +262,39 @@
             Removes a weapon from your inventory for Goofy.
             </summary>
         </member>
-        <member name="M:KHMemLibrary.KH2FM.SetAbility(KHMemLibrary.KH2FMLib.AbilitySlot,KHMemLibrary.KH2FMLib.Ability)">
+        <member name="M:KHMemLibrary.KH2FM.AddAbility(KHMemLibrary.KH2FMLib.AbilitySlot,KHMemLibrary.KH2FMLib.Ability)">
             <summary>
-            Sets an ability to a slot of your choice.
+            Adds an ability to a slot of your choice.
             </summary>
         </member>
-        <member name="M:KHMemLibrary.KH2FM.SetArmor(KHMemLibrary.KH2FMLib.ArmorSlot,KHMemLibrary.KH2FMLib.ArmorID)">
+        <member name="M:KHMemLibrary.KH2FM.EquipArmorSora(KHMemLibrary.KH2FMLib.ArmorSlotSora,KHMemLibrary.KH2FMLib.ArmorID)">
             <summary>
-            Sets an armor to a slot of your choice.
+            Equip an armor to Sora in a slot of your choice.
             </summary>
         </member>
-        <member name="M:KHMemLibrary.KH2FM.SetAccessory(KHMemLibrary.KH2FMLib.AccessorySlot,KHMemLibrary.KH2FMLib.AccessoryID)">
+        <member name="M:KHMemLibrary.KH2FM.EquipArmorDonald(KHMemLibrary.KH2FMLib.ArmorSlotDonald,KHMemLibrary.KH2FMLib.ArmorID)">
             <summary>
-            Sets an accessory to a slot of your choice.
+            Equip an armor to Donald in a slot of your choice.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.EquipArmorGoofy(KHMemLibrary.KH2FMLib.ArmorSlotGoofy,KHMemLibrary.KH2FMLib.ArmorID)">
+            <summary>
+            Equip an armor to Goofy in a slot of your choice.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.EquipAccessorySora(KHMemLibrary.KH2FMLib.AccessorySlotSora,KHMemLibrary.KH2FMLib.AccessoryID)">
+            <summary>
+            Equip an accessory to Sora in a slot of your choice.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.EquipAccessoryDonald(KHMemLibrary.KH2FMLib.AccessorySlotDonald,KHMemLibrary.KH2FMLib.AccessoryID)">
+            <summary>
+            Equip an accessory to Donald in a slot of your choice.
+            </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.EquipAccessoryGoofy(KHMemLibrary.KH2FMLib.AccessorySlotGoofy,KHMemLibrary.KH2FMLib.AccessoryID)">
+            <summary>
+            Equip an accessory to Goofy in a slot of your choice.
             </summary>
         </member>
         <member name="M:KHMemLibrary.KH2FM.ModifyConsumable(KHMemLibrary.KH2FMLib.Consumable,System.Int32)">

@@ -106,7 +106,7 @@
         Slot79 = 0x9A9650,
     }
 
-    public enum ArmorSlot
+    public enum ArmorSlotSora
     {
         Slot01 = 0x9A9574,
         Slot02 = 0x9A9576,
@@ -114,12 +114,38 @@
         Slot04 = 0x9A957A
     }
 
-    public enum AccessorySlot
+    public enum ArmorSlotDonald
+    {
+        Slot01 = 0x9A9688,
+        Slot02 = 0x9A968A
+    }
+
+    public enum ArmorSlotGoofy
+    {
+        Slot01 = 0x9A979C,
+        Slot02 = 0x9A979E,
+        Slot03 = 0x9A97A0
+    }
+
+    public enum AccessorySlotSora
     {
         Slot01 = 0x9A9584,
         Slot02 = 0x9A9586,
         Slot03 = 0x9A9588,
         Slot04 = 0x9A958A
+    }
+
+    public enum AccessorySlotDonald
+    {
+        Slot01 = 0x9A9698,
+        Slot02 = 0x9A969A,
+        Slot03 = 0x9A969C
+    }
+
+    public enum AccessorySlotGoofy
+    {
+        Slot01 = 0x9A97AC,
+        Slot02 = 0x9A97AE
     }
 
     public enum Ability
