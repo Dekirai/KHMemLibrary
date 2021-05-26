@@ -30,6 +30,64 @@ namespace KHMemLibrary
             memory.WriteMemory($"{process}+9AA480", "int", $"{value}");
         }
 
+        public void WriteInt(int address, int value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "int", $"{value}");
+        }
+
+        public void WriteFloat(int address, float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "float", $"{value}");
+        }
+
+        public void WriteString(int address, string value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "string", $"{value}");
+        }
+
+        public void WriteByte(int address, byte value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "byte", $"0x{value:X2}");
+        }
+
+        public void Write2Bytes(int address, byte value1, byte value2)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "bytes", $"0x{value1:X2} 0x{value2:X2}");
+        }
+
+        public int ReadInt(int address)
+        {
+            GetPID();
+            int result = memory.ReadInt($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
+        public float ReadFloat(int address)
+        {
+            GetPID();
+            float result = memory.ReadFloat($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
+        public string ReadString(int address)
+        {
+            GetPID();
+            string result = memory.ReadString($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
+        public byte ReadByte(int address)
+        {
+            GetPID();
+            byte result = (byte)memory.ReadByte($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
         /// <summary>
         /// Change the amount of munny you currently have. Maximum is 999999.
         /// </summary>
