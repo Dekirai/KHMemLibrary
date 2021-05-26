@@ -143,6 +143,18 @@
             Check if an Event has ben won or not.
             </summary>
         </member>
+        <member name="M:KHMemLibrary.KH2FM.BattleStateText">
+            <summary>
+            Returns the current Battle State as String
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.BattleStateID">
+            <summary>
+            Returns the current Battle State as Int
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:KHMemLibrary.KH2FM.FetchWorldID">
             <summary>
             Returns the current ID of the World you are currently in as a hex value.
@@ -204,6 +216,21 @@
             <summary>
             Returns the current amount of munny you have.
             </summary>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.WorldBarrier(System.Int32)">
+            <summary>
+            Sets the current world map barrier. Minimum is 0 and maximum is 22.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:KHMemLibrary.KH2FM.ModifyDestination(KHMemLibrary.KH2FMLib.Destination,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Modifies the destination of available warp points from the world map.
+            </summary>
+            <param name="origin"></param>
+            <param name="world"></param>
+            <param name="room"></param>
+            <param name="spawn"></param>
         </member>
         <member name="M:KHMemLibrary.KH2FM.FieldBGM(KHMemLibrary.KH2FMLib.BGM)">
             <summary>
@@ -340,6 +367,11 @@
         <member name="F:KHMemLibrary.KH2FMLib.FPSValue.FPS120">
             <summary>
             Limits the FPS to 120 FPS.
+            </summary>
+        </member>
+        <member name="F:KHMemLibrary.KH2FMLib.WorldAvailability_Access.Special">
+            <summary>
+            That's used for the dark aura around HB or TT being blurry
             </summary>
         </member>
         <member name="T:KHMemLibrary.KH2FMLib.PartyWorld">

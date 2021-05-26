@@ -23,6 +23,56 @@
         FPS120 = 120
     }
 
+    public enum Destination
+    {
+        TT_TheUsualSpot = 0x2AABCFC,
+        HB_AnsemsStudy = 0x2AABCB0,
+        AG_RuinedChamber = 0x2AABC50,
+        BC_Dungeon = 0x2AABC68,
+        PR_Rampart = 0x2AABC6C,
+        DC_Library = 0x2AABC84,
+        TWTNW_ProofOfExistence = 0x2AABCA4,
+        OC_TheLock = 0x2AABCCC,
+        PL_Oasis = 0x2AABCD8,
+        AT_UnderseaCourtyard = 0x2AABCDC,
+        LD_BambooGrove = 0x2AABCE0,
+        HT_DrFinklesteinsLab = 0x2AABCF0
+    }
+
+    public enum WorldAvailability
+    {
+        TwilightTown = 0x9AB064,
+        HollowBastion = 0x9AB06C,
+        BeastsCastle = 0x9AB070,
+        OlympusColiseum = 0x9AB074,
+        Agrabah = 0x9AB078,
+        TheLandOfDragons = 0x9AB07C,
+        PrideLands = 0x9AB084,
+        Atlantica = 0x9AB088,
+        DisneyCastle = 0x9AB08C,
+        HalloweenTown = 0x9AB094,
+        PortRoyal = 0x9AB09C,
+        TheWorldThatNeverWas = 0x9AB0A4
+    }
+
+    public enum WorldAvailability_Access
+    {
+        Invisible = 0,
+        Locked = 1,
+        Unlocked = 2,
+        /// <summary>
+        /// That's used for the dark aura around HB or TT being blurry
+        /// </summary>
+        Special = 3
+    }
+
+    public enum WorldAvailability_Barrier
+    {
+        NoBarrier = 0,
+        NoBarrierWithSparkles = 1,
+        Barrier = 2
+    }
+
     public enum AbilitySlot
     {
         Slot01 = 0x9A95B4,

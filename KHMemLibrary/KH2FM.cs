@@ -37,11 +37,11 @@ namespace KHMemLibrary
         public void Munny(int value)
         {
             GetPID();
-            if (value > 9999999 || value < 0)
-            {
-                Console.WriteLine("[KHMemLibrary] Invalid munny value.");
-                return;
-            }
+            GetPID();
+            if (value > 99)
+                value = 255;
+            if (value < 0)
+                value = 0;
             memory.WriteMemory($"{process}+9A94B0", "int", $"{value}");
         }
 
@@ -245,6 +245,35 @@ namespace KHMemLibrary
         }
 
         /// <summary>
+        /// Returns the current Battle State as String
+        /// </summary>
+        /// <returns></returns>
+        public string BattleStateText()
+        {
+            GetPID();
+            string result = "Idle";
+            int battlestate = memory.ReadByte($"{process}+2A0EAC4");
+            if (battlestate == 0)
+                result = "Idle";
+            else if (battlestate == 1)
+                result = "Battle";
+            else if (battlestate == 2)
+                result = "Event";
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the current Battle State as Int
+        /// </summary>
+        /// <returns></returns>
+        public int BattleStateID()
+        {
+            GetPID();
+            int battlestate = memory.ReadByte($"{process}+2A0EAC4");
+            return battlestate;
+        }
+
+        /// <summary>
         /// Returns the current ID of the World you are currently in as a hex value.
         /// </summary>
         public string FetchWorldID()
@@ -379,6 +408,41 @@ namespace KHMemLibrary
             GetPID();
             int munny = memory.ReadInt($"{process}+9A94B0");
             return munny;
+        }
+
+        /// <summary>
+        /// Sets the current world map barrier. Minimum is 0 and maximum is 22.
+        /// </summary>
+        /// <param name="value"></param>
+        public void WorldBarrier(int value)
+        {
+            GetPID();
+            if (value > 22)
+                value = 22;
+            if (value < 0)
+                value = 0;
+            memory.WriteMemory($"{process}+9AB209", "int", $"{value}");
+        }
+
+        public void ModifyWorldAvailability(WorldAvailability availability, WorldAvailability_Access access, int visits, WorldAvailability_Barrier barrier)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)availability).ToString("X8")}", "byte", $"0x{(int)access:X}");
+            memory.WriteMemory($"{process}+{((int)availability+1).ToString("X8")}", "byte", $"0x{visits:X}");
+            memory.WriteMemory($"{process}+{((int)availability+3).ToString("X8")}", "byte", $"0x{(int)barrier:X}");
+        }
+
+        /// <summary>
+        /// Modifies the destination of available warp points from the world map.
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="world"></param>
+        /// <param name="room"></param>
+        /// <param name="spawn"></param>
+        public void ModifyDestination(Destination origin, byte world, byte room, byte spawn)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)origin).ToString("X8")}", "bytes", $"0x{world:X} 0x{room:X} 0x{spawn:X} 0x00");
         }
 
         /// <summary>
@@ -565,11 +629,10 @@ namespace KHMemLibrary
         public void ModifyConsumable(Consumable item, int value)
         {
             GetPID();
-            if (value > 255 || value < 0)
-            {
-                Console.WriteLine("[KHMemLibrary] Invalid quantity value.");
-                return;
-            }
+            if (value > 255)
+                value = 255;
+            if (value < 0)
+                value = 0;
             memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
@@ -579,11 +642,10 @@ namespace KHMemLibrary
         public void ModifyKeyItem(KeyItem item, int value)
         {
             GetPID();
-            if (value > 255 || value < 0)
-            {
-                Console.WriteLine("[KHMemLibrary] Invalid quantity value.");
-                return;
-            }
+            if (value > 255)
+                value = 255;
+            if (value < 0)
+                value = 0;
             memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
@@ -593,11 +655,10 @@ namespace KHMemLibrary
         public void ModifyMaterial(Material item, int value)
         {
             GetPID();
-            if (value > 255 || value < 0)
-            {
-                Console.WriteLine("[KHMemLibrary] Invalid quantity value.");
-                return;
-            }
+            if (value > 255)
+                value = 255;
+            if (value < 0)
+                value = 0;
             memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
