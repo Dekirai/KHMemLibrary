@@ -21,13 +21,74 @@ namespace KHMemLibrary
             if (pid > 0) openProc = memory.OpenProcess(pid);
         }
 
+        #region Read/Write functions
+
+        public void WriteInt(int address, int value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "int", $"{value}");
+        }
+
+        public void WriteFloat(int address, float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "float", $"{value}");
+        }
+
+        public void WriteString(int address, string value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "string", $"{value}");
+        }
+
+        public void WriteByte(int address, byte value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "byte", $"0x{value:X2}");
+        }
+
+        public void Write2Bytes(int address, byte value1, byte value2)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)address).ToString("X8")}", "bytes", $"0x{value1:X2} 0x{value2:X2}");
+        }
+
+        public int ReadInt(int address)
+        {
+            GetPID();
+            int result = memory.ReadInt($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
+        public float ReadFloat(int address)
+        {
+            GetPID();
+            float result = memory.ReadFloat($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
+        public string ReadString(int address)
+        {
+            GetPID();
+            string result = memory.ReadString($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
+        public byte ReadByte(int address)
+        {
+            GetPID();
+            byte result = (byte)memory.ReadByte($"{process}+{((int)address).ToString("X8")}");
+            return result;
+        }
+
+        #endregion
+
         /// <summary>
         /// Refills Sora's HP to his current max HP.
         /// </summary>
         public void RefillHP()
         {
-            GetPID();
-            memory.WriteMemory($"{process}+2D592CC", "int", $"{memory.ReadInt($"{process}+2D592D0")}");
+            WriteInt(0x2D592CC, ReadInt(0x2D592D0));
         }
 
         /// <summary>
@@ -35,8 +96,7 @@ namespace KHMemLibrary
         /// </summary>
         public void RefillMP()
         {
-            GetPID();
-            memory.WriteMemory($"{process}+2D592D4", "int", $"{memory.ReadInt($"{process}+2D592D8")}");
+            WriteInt(0x2D592D4, ReadInt(0x2D592D8));
         }
 
         /// <summary>
@@ -44,8 +104,7 @@ namespace KHMemLibrary
         /// </summary>
         public void SaveMenu()
         {
-            GetPID();
-            memory.WriteMemory($"{process}+2350CD4", "byte", $"0x03");
+            WriteByte(0x2350CD4, 0x03);
         }
 
         /// <summary>
@@ -53,8 +112,7 @@ namespace KHMemLibrary
         /// </summary>
         public void PartyMenu()
         {
-            GetPID();
-            memory.WriteMemory($"{process}+2350CD8", "byte", $"0x01");
+            WriteByte(0x2350CD8, 0x01);
         }
 
         /// <summary>
@@ -63,8 +121,7 @@ namespace KHMemLibrary
         /// <param name="value">Default is 1</param>
         public void GameSpeed(float value)
         {
-            GetPID();
-            memory.WriteMemory($"{process}+233C24C", "float", $"{value}");
+            WriteFloat(0x233C24C, value);
         }
 
         /// <summary>
@@ -74,12 +131,11 @@ namespace KHMemLibrary
         /// <param name="spawnpoint"></param>
         public void TriggerWarp(WorldID world, byte spawnpoint)
         {
-            GetPID();
-            memory.WriteMemory($"{process}+233CB70", "byte", $"{(int)world:X2}");
-            memory.WriteMemory($"{process}+233CB74", "byte", $"0x{spawnpoint:X2}");
-            memory.WriteMemory($"{process}+22E86E0", "byte", $"0x0A");
-            memory.WriteMemory($"{process}+233C240", "byte", $"0x05");
-            memory.WriteMemory($"{process}+22E86DC", "byte", $"0x02");
+            WriteByte(0x233CB70, (byte)world);
+            WriteByte(0x233CB74, spawnpoint);
+            WriteByte(0x22E86E0, 0x0A);
+            WriteByte(0x233C240, 0x05);
+            WriteByte(0x22E86DC, 0x02);
         }
     }
 }
