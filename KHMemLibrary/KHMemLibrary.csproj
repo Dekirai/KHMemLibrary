@@ -10,6 +10,7 @@ Made usage of memory.dll</Description>
     <Version>1.1.44</Version>
     <Authors>Dekirai</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageVersion>1.1.46</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

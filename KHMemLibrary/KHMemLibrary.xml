@@ -78,6 +78,12 @@
             </summary>
             <param name="value"></param>
         </member>
+        <member name="M:KHMemLibrary.KH2FM.CanDriveAlone(System.Boolean)">
+            <summary>
+            Allows Sora to drive alone.
+            </summary>
+            <param name="value"></param>
+        </member>
         <member name="M:KHMemLibrary.KH2FM.EndEvent">
             <summary>
             Aims to end an Event immediately. May not work on every Event.
@@ -277,19 +283,19 @@
         </member>
         <member name="M:KHMemLibrary.KH2FM.BattleStateText">
             <summary>
-            Returns the current Battle State as String
+            Returns the current Battle State as a string.
             </summary>
             <returns></returns>
         </member>
         <member name="M:KHMemLibrary.KH2FM.BattleStateID">
             <summary>
-            Returns the current Battle State as Int
+            Returns the current Battle State as an int.
             </summary>
             <returns></returns>
         </member>
         <member name="M:KHMemLibrary.KH2FM.FetchWorldID">
             <summary>
-            Returns the current ID of the World you are currently in as a hex value.
+            Returns the current ID of the World you are currently in as an int.
             </summary>
         </member>
         <member name="M:KHMemLibrary.KH2FM.FetchFPS">
@@ -299,7 +305,7 @@
         </member>
         <member name="M:KHMemLibrary.KH2FM.FetchRoomID">
             <summary>
-            Returns the current ID of the Room you are currently in as a hex value.
+            Returns the current ID of the Room you are currently in as an int.
             </summary>
         </member>
         <member name="M:KHMemLibrary.KH2FM.FetchDifficultyText">
@@ -321,7 +327,7 @@
         </member>
         <member name="M:KHMemLibrary.KH2FM.FetchEventID">
             <summary>
-            Returns the current IDs of the Event you are currently in as a hex value.
+            Returns the current IDs of the Event you are currently in as a hex string.
             </summary>
         </member>
         <member name="M:KHMemLibrary.KH2FM.FetchWorldText">
