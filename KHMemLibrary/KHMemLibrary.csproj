@@ -1,21 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.2.0</Version>
     <Description>A Memory Library for various Kingdom Hearts games on PC.
 Developed by Dekirai.
 Made usage of memory.dll</Description>
-    <Copyright>Dekirai</Copyright>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.44</Version>
-    <Authors>Dekirai</Authors>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageVersion>1.1.46</PackageVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\Dekirai\source\repos\KHMemLibrary\KHMemLibrary\KHMemLibrary.xml</DocumentationFile>
-    <WarningLevel>2</WarningLevel>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

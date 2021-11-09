@@ -98,20 +98,20 @@ namespace KHMemLibrary
             if (world == 0x0B)
             {
                 if (room == 0x02 && event1 == 0x3F && event2 == 0x3F && event3 == 0x3F)
-                    WriteInt(0xB63534, 1);
+                    WriteInt(0xB63574, 1);
                 else if (room == 0x04)
                 {
                     if (event1 == 0x40 && event2 == 0x40 && event3 == 0x40)
-                        WriteInt(0xB63544, 0);
+                        WriteInt(0xB63584, 0);
                     else if (event1 == 0x37 && event2 == 0x37 && event3 == 0x37)
-                        WriteInt(0xB63534, 30000);
+                        WriteInt(0xB63574, 30000);
                 }
                 else if (room == 0x01 && event1 == 0x33 && event2 == 0x33 && event3 == 0x33)
-                    WriteInt(0xB63538, 5);
+                    WriteInt(0xB63578, 5);
                 else if (room == 0x03 && event1 == 0x35 && event2 == 0x35 && event3 == 0x35)
-                    WriteInt(0xB63538, 10000);
+                    WriteInt(0xB63578, 10000);
                 else if (room == 0x09 && event1 == 0x41 && event2 == 0x41 && event3 == 0x41)
-                    WriteInt(0xB63538, 10000);
+                    WriteInt(0xB63578, 10000);
             }
         }
 
@@ -121,7 +121,7 @@ namespace KHMemLibrary
         /// <param name="value"></param>
         public void AntiPoints(int value)
         {
-            WriteInt(0x9AA480, value);
+            WriteInt(0x9AA480 + 0x40, value);
         }
 
         /// <summary>
@@ -130,11 +130,11 @@ namespace KHMemLibrary
         /// <param name="value"></param>
         public void Munny(int value)
         {
-            if (value > 99)
+            if (value > 999999)
                 value = 999999;
             if (value < 0)
                 value = 0;
-            WriteInt(0x9A94B0, value);
+            WriteInt(0x9A94B0 + 0x40, value);
         }
 
         /// <summary>
@@ -155,17 +155,6 @@ namespace KHMemLibrary
             WriteFloat(0x89E9D0, (int) value);
         }
 
-        /// <summary>
-        /// Sora/Roxas won't get hurt by attacks if set to true.
-        /// </summary>
-        /// <param name="value"></param>
-        public void Invincible(bool value)
-        {
-            if (value == true)
-                WriteByte(0x3D37BB, 0xEB);
-            else if (value == false)
-                WriteByte(0x3D37BB, 0x75);
-        }
 
         /// <summary>
         /// You won't be able to pause the game if set to true.
@@ -174,32 +163,9 @@ namespace KHMemLibrary
         public void BlockPause(bool value)
         {
             if (value == true)
-                WriteByte(0xAB9038, 0x01);
+                WriteByte(0xAB9038 + 0x40, 0x01);
             else if (value == false)
-                WriteByte(0xAB9038, 0x00);
-        }
-
-        /// <summary>
-        /// Allows Sora to drive alone.
-        /// </summary>
-        /// <param name="value"></param>
-        public void CanDriveAlone(bool value)
-        {
-            GetPID();
-            if (value == true)
-            {
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3FF497", "bytes", "0xE9 0x24 0x02 0x00 0x00 0x90");
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3F040E", "bytes", "0x90 0x90");
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3FF60F", "bytes", "0xE9 0x24 0x02 0x00 0x00 0x90");
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3F042B", "byte", "0xEB");
-            }
-            else if (value == false)
-            {
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3FF497", "bytes", "0x0F 0x87 0x23 0x02 0x00 0x00");
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3F040E", "bytes", "0x74 0x21");
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3FF60F", "bytes", "0x0F 0x83 0xAB 0x00 0x00 0x00");
-                memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+3F042B", "byte", "0x75");
-            }
+                WriteByte(0xAB9038 + 0x40, 0x00);
         }
 
         /// <summary>
@@ -250,8 +216,8 @@ namespace KHMemLibrary
         /// </summary>
         public void SoftReset()
         {
-            WriteByte(0xAB841A, 0x01);
-            WriteInt(0x751310, 1);
+            WriteByte(0xAB841A + 0x40, 0x01);
+            WriteInt(0x751310 + 0x40, 1);
         }
 
         /// <summary>
@@ -280,7 +246,7 @@ namespace KHMemLibrary
             };
             WriteInt(0x9AA750, EXPTable[value]);
             string level = value.ToString("X");
-            memory.WriteMemory($"{process}+9A956F", "byte", $"0x{level}");
+            memory.WriteMemory($"{process}+9A95AF", "byte", $"0x{level}");
         }
 
         /// <summary>
@@ -335,7 +301,7 @@ namespace KHMemLibrary
         public void RefillHP()
         {
             GetPID();
-            memory.WriteMemory($"{process}+2A20C58", "int", $"{memory.ReadInt($"{process}+2A20C5C")}");
+            memory.WriteMemory($"{process}+2A20C98", "int", $"{memory.ReadInt($"{process}+2A20C9C")}");
         }
 
         /// <summary>
@@ -344,8 +310,8 @@ namespace KHMemLibrary
         public void RefillMP()
         {
             GetPID();
-            memory.WriteMemory($"{process}+2A20DD8", "int", $"{memory.ReadInt($"{process}+2A20DDC")}");
-            memory.WriteMemory($"{process}+2A20E14", "float", "0");
+            memory.WriteMemory($"{process}+2A20E18", "int", $"{memory.ReadInt($"{process}+2A20E1C")}");
+            memory.WriteMemory($"{process}+2A20E54", "float", "0");
         }
 
         /// <summary>
@@ -354,8 +320,8 @@ namespace KHMemLibrary
         public void RefillDrive()
         {
             GetPID();
-            memory.WriteMemory($"{process}+2A20E09", "byte", $"{memory.ReadByte($"{process}+2A20E0A")}");
-            memory.WriteMemory($"{process}+2A20E08", "byte", "0x63");
+            memory.WriteMemory($"{process}+2A20E49", "byte", $"{memory.ReadByte($"{process}+2A20E4A")}");
+            memory.WriteMemory($"{process}+2A20E48", "byte", "0x63");
         }
 
         #endregion
@@ -369,7 +335,7 @@ namespace KHMemLibrary
         public void FieldBGM(BGM bgm)
         {
             GetPID();
-            memory.WriteMemory($"{process}+AB8504", "int", $"{(int) bgm}");
+            memory.WriteMemory($"{process}+AB8544", "int", $"{(int) bgm}");
         }
 
         /// <summary>
@@ -379,7 +345,7 @@ namespace KHMemLibrary
         public void BattleBGM(BGM bgm)
         {
             GetPID();
-            memory.WriteMemory($"{process}+AB8514", "int", $"{(int) bgm}");
+            memory.WriteMemory($"{process}+AB8554", "int", $"{(int) bgm}");
         }
 
         /// <summary>
@@ -398,7 +364,7 @@ namespace KHMemLibrary
             };
             int index = random.Next(list.Count);
             GetPID();
-            memory.WriteMemory($"{process}+AB8504", "int", $"{index}");
+            memory.WriteMemory($"{process}+AB8544", "int", $"{index}");
         }
 
         /// <summary>
@@ -417,7 +383,7 @@ namespace KHMemLibrary
             };
             int index = random.Next(list.Count);
             GetPID();
-            memory.WriteMemory($"{process}+AB8514", "int", $"{index}");
+            memory.WriteMemory($"{process}+AB8554", "int", $"{index}");
         }
 
         #endregion
@@ -548,7 +514,7 @@ namespace KHMemLibrary
         public void EquipWeaponSora(KeybladeID item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+9A9560", "int", $"{(int) item}");
+            memory.WriteMemory($"{process}+9A95A0", "int", $"{(int) item}");
         }
 
         /// <summary>
@@ -557,7 +523,7 @@ namespace KHMemLibrary
         public void EquipWeaponDonald(StaffID item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+9A9674", "int", $"{(int) item}");
+            memory.WriteMemory($"{process}+9A96B4", "int", $"{(int) item}");
         }
 
         /// <summary>
@@ -566,7 +532,7 @@ namespace KHMemLibrary
         public void EquipWeaponGoofy(ShieldID item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+9A9788", "int", $"{(int) item}");
+            memory.WriteMemory($"{process}+9A97C8", "int", $"{(int) item}");
         }
 
         #endregion
@@ -657,7 +623,7 @@ namespace KHMemLibrary
         public bool isMapLoaded()
         {
             bool isMapLoaded = false;
-            int check = ReadByte(0x9B8090);
+            int check = ReadByte(0x9B8090 + 0x40);
             if (check == 1)
                 isMapLoaded = true;
             return isMapLoaded;
@@ -669,7 +635,7 @@ namespace KHMemLibrary
         public bool hasEventWon()
         {
             bool hasEventWon = false;
-            int check = ReadByte(0xAB8B50);
+            int check = ReadByte(0xAB8B50 + 0x40);
             if (check == 1)
                 hasEventWon = true;
             return hasEventWon;
@@ -682,7 +648,7 @@ namespace KHMemLibrary
         public string BattleStateText()
         {
             string result = "Idle";
-            int battlestate = ReadByte(0x2A0EAC4);
+            int battlestate = ReadByte(0x2A0EAC4 + 0x40);
             if (battlestate == 0)
                 result = "Idle";
             else if (battlestate == 1)
@@ -698,7 +664,7 @@ namespace KHMemLibrary
         /// <returns></returns>
         public int BattleStateID()
         {
-            int battlestate = ReadByte(0x2A0EAC4);
+            int battlestate = ReadByte(0x2A0EAC4 + 0x40);
             return battlestate;
         }
 
@@ -735,7 +701,7 @@ namespace KHMemLibrary
         /// <returns></returns>
         public async Task<string> FetchDifficultyText()
         {
-            int difficulty_get = ReadByte(0x9A9508);
+            int difficulty_get = ReadByte(0x9A9508 + 0x40);
             var difficulty_fetch = await Difficulties.GetDifficulty(difficulty_get);
             string difficulty = difficulty_fetch[0];
             return difficulty;
@@ -747,7 +713,7 @@ namespace KHMemLibrary
         /// <returns></returns>
         public int FetchDifficultyID()
         {
-            int difficultyid = ReadByte(0x9A9508);
+            int difficultyid = ReadByte(0x9A9508 + 0x40);
             return difficultyid;
         }
 
@@ -803,7 +769,7 @@ namespace KHMemLibrary
         public int FetchFieldBGM()
         {
             GetPID();
-            int BGM = ReadByte(0xAB8504);
+            int BGM = ReadByte(0xAB8504 + 0x40);
             return BGM;
         }
 
@@ -813,7 +779,7 @@ namespace KHMemLibrary
         public int FetchBattleBGM()
         {
             GetPID();
-            int BGM = ReadByte(0xAB8514);
+            int BGM = ReadByte(0xAB8514 + 0x40);
             return BGM;
         }
 
@@ -823,7 +789,7 @@ namespace KHMemLibrary
         public int FetchMunny()
         {
             GetPID();
-            int munny = ReadInt(0x9A94B0);
+            int munny = ReadInt(0x9A94B0 + 0x40);
             return munny;
         }
 
