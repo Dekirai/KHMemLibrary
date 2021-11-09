@@ -11,8 +11,8 @@ For a complete library breakdown, don't mind to look at the [Wiki](https://githu
 ## Requirements
 
  - Kingdom Hearts 1 or Kingdom Hearts 2 on your PC
- - Visual Studio 2019 (Recommended)
- - [.NET 5](https://dotnet.microsoft.com/download/dotnet) or greater
+ - Visual Studio 2022 (Recommended)
+ - [.NET 6](https://dotnet.microsoft.com/download/dotnet) or greater
 
 ## How to install the library
 
