@@ -137,5 +137,100 @@ namespace KHMemLibrary
             WriteByte(0x233C240, 0x05);
             WriteByte(0x22E86DC, 0x02);
         }
+
+        /// <summary>
+        /// Checks wether you are in the Gummi Ship (World Map) or not.
+        /// </summary>
+        public bool isGummi()
+        {
+            bool isGummi = false;
+            int check = ReadByte(0x50421D);
+            if (check == 1)
+                isGummi = true;
+            return isGummi;
+        }
+
+        /// <summary>
+        /// Returns the current ID of the World you are currently in as an int.
+        /// </summary>
+        public int FetchWorldID()
+        {
+            int result = ReadByte(0x233CADC);
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the current ID of the Room you are currently in as an int.
+        /// </summary>
+        public int FetchRoomID()
+        {
+            int result = ReadByte(0x233CB44);
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the current World as a plain text.
+        /// </summary>
+        public async Task<string> FetchWorldText()
+        {
+            int world_get = ReadByte(0x233CADC);
+            var world_fetch = await Worlds.GetWorld(world_get);
+            string world = world_fetch[0];
+            return world;
+        }
+
+        /// <summary>
+        /// Returns the current Room as a plain text.
+        /// </summary>
+        public async Task<string> FetchRoomText()
+        {
+            int world_get = ReadByte(0x233CADC);
+            var world_fetch = await Worlds.GetWorld(world_get);
+            int room_get = ReadByte(0x233CB44);
+            var room_fetch = await Rooms.GetRoom(world_fetch[0]);
+            string room = room_fetch[room_get];
+            return room;
+        }
+
+        /// <summary>
+        /// Returns the current difficulty as a plain text.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> FetchDifficultyText()
+        {
+            int difficulty_get = ReadByte(0x2DFBDFC);
+            var difficulty_fetch = await Difficulties.GetDifficulty(difficulty_get);
+            string difficulty = difficulty_fetch[0];
+            return difficulty;
+        }
+
+        /// <summary>
+        /// Returns the current ID of the difficulty you are playing as an int.
+        /// </summary>
+        /// <returns></returns>
+        public int FetchDifficultyID()
+        {
+            int difficultyid = ReadByte(0x2DFBDFC);
+            return difficultyid;
+        }
+
+        /// <summary>
+        /// Returns the current amount of munny you have.
+        /// </summary>
+        public int FetchMunny()
+        {
+            GetPID();
+            int munny = ReadInt(0x2DFBDEC);
+            return munny;
+        }
+
+        /// <summary>
+        /// Returns your current FPS from the PC exclusive settings menu.
+        /// </summary>
+        public float FetchFPS()
+        {
+            float FPS = memory.ReadFloat($"{process}+22B72B0");
+            return FPS;
+        }
     }
 }

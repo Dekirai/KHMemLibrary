@@ -980,6 +980,18 @@
         LuckyRing = 0x3F00
     }
 
+    public enum UCMID
+    {
+        Player_Sora = 0x5400,
+        Player_Sora_Form_Valor = 0x5500,
+        Player_Sora_Form_Wisdom = 0x5600,
+        Player_Sora_Form_Master = 0x5700,
+        Player_Sora_Form_Final = 0x5800,
+        Player_Sora_Form_Anti = 0x5900,
+        Player_Roxas = 0x5A00,
+        Player_Mickey_Coat = 0x5B00
+    }
+
     public enum Magic
     {
         Fire = 0x9AA604 + 0x40,

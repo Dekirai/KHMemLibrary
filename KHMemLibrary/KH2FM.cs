@@ -155,7 +155,6 @@ namespace KHMemLibrary
             WriteFloat(0x89E9D0, (int) value);
         }
 
-
         /// <summary>
         /// You won't be able to pause the game if set to true.
         /// </summary>
@@ -291,6 +290,44 @@ namespace KHMemLibrary
         {
             Write2Bytes((int) world, (byte) main, (byte) first);
             Write2Bytes((int) world + 2, (byte) second, (byte) third);
+        }
+
+        /// <summary>
+        /// Change the coordinate of Sora's/Roxas' X position.
+        /// </summary>
+        public void CoordX(float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+02A0E8A0,0x670", "float", $"{value}");
+        }
+
+        /// <summary>
+        /// Change the coordinate of Sora's/Roxas' Y position.
+        /// </summary>
+        public void CoordY(float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+02A0E8A0,0x674", "float", $"{value}");
+        }
+
+        /// <summary>
+        /// Change the coordinate of Sora's/Roxas' Z position.
+        /// </summary>
+        public void CoordZ(float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+02A0E8A0,0x678", "float", $"{value}");
+        }
+
+        /// <summary>
+        /// Adds an ability to a slot of your choice.
+        /// </summary>
+        public void PlayerUCM(UCMID ucmid)
+        {
+            GetPID();
+            var byte1 = (byte)(((int)ucmid & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)ucmid & 0x00FF));
+            memory.WriteMemory($"{process}+0x2A6F658", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         #region Refills
@@ -791,6 +828,36 @@ namespace KHMemLibrary
             GetPID();
             int munny = ReadInt(0x9A94B0 + 0x40);
             return munny;
+        }
+
+        /// <summary>
+        /// Returns the current X coordinate of Sora/Roxas.
+        /// </summary>
+        public float FetchCoordX()
+        {
+            GetPID();
+            float coordX = memory.ReadFloat($"{process}+02A0E8A0,0x670");
+            return coordX;
+        }
+
+        /// <summary>
+        /// Returns the current Y coordinate of Sora/Roxas.
+        /// </summary>
+        public float FetchCoordY()
+        {
+            GetPID();
+            float coordY = memory.ReadFloat($"{process}+02A0E8A0,0x674");
+            return coordY;
+        }
+
+        /// <summary>
+        /// Returns the current Z coordinate of Sora/Roxas.
+        /// </summary>
+        public float FetchCoordZ()
+        {
+            GetPID();
+            float coordZ = memory.ReadFloat($"{process}+02A0E8A0,0x678");
+            return coordZ;
         }
 
         #endregion
