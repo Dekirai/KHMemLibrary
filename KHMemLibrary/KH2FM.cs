@@ -148,7 +148,7 @@ namespace KHMemLibrary
         /// <param name="value">Valid values are 0, 30, 60 and 120</param>
         public void FPS(FPSValue value)
         {
-            WriteFloat(0x89E9D0, (int)value);
+            WriteFloat(0x89E9D0, (float)value);
         }
 
         /// <summary>
@@ -204,6 +204,7 @@ namespace KHMemLibrary
             WriteByte(0x714DBC, EventID);
             WriteByte(0x714DBE, EventID);
             WriteByte(0x714DC0, EventID);
+            WriteByte(0x714DBA, 0x00);
         }
 
         /// <summary>
