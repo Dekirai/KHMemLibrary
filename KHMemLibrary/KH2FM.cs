@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using KHMemLibrary.KH2FMLib;
+﻿using KHMemLibrary.KH2FMLib;
 using Memory;
 
 namespace KHMemLibrary
@@ -25,58 +21,58 @@ namespace KHMemLibrary
         public void WriteInt(int address, int value)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{((int) address):X8}", "int", $"{value}");
+            memory.WriteMemory($"{process}+{((int)address):X8}", "int", $"{value}");
         }
 
         public void WriteFloat(int address, float value)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{((int) address):X8}", "float", $"{value}");
+            memory.WriteMemory($"{process}+{((int)address):X8}", "float", $"{value}");
         }
 
         public void WriteString(int address, string value)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{((int) address):X8}", "string", $"{value}");
+            memory.WriteMemory($"{process}+{((int)address):X8}", "string", $"{value}");
         }
 
         public void WriteByte(int address, byte value)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{((int) address):X8}", "byte", $"0x{value:X2}");
+            memory.WriteMemory($"{process}+{((int)address):X8}", "byte", $"0x{value:X2}");
         }
 
         public void Write2Bytes(int address, byte value1, byte value2)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{((int) address):X8}", "bytes", $"0x{value1:X2} 0x{value2:X2}");
+            memory.WriteMemory($"{process}+{((int)address):X8}", "bytes", $"0x{value1:X2} 0x{value2:X2}");
         }
 
         public int ReadInt(int address)
         {
             GetPID();
-            int result = memory.ReadInt($"{process}+{((int) address):X8}");
+            int result = memory.ReadInt($"{process}+{((int)address):X8}");
             return result;
         }
 
         public float ReadFloat(int address)
         {
             GetPID();
-            float result = memory.ReadFloat($"{process}+{((int) address):X8}");
+            float result = memory.ReadFloat($"{process}+{((int)address):X8}");
             return result;
         }
 
         public string ReadString(int address)
         {
             GetPID();
-            string result = memory.ReadString($"{process}+{((int) address):X8}");
+            string result = memory.ReadString($"{process}+{((int)address):X8}");
             return result;
         }
 
         public byte ReadByte(int address)
         {
             GetPID();
-            byte result = (byte) memory.ReadByte($"{process}+{((int) address):X8}");
+            byte result = (byte)memory.ReadByte($"{process}+{((int)address):X8}");
             return result;
         }
 
@@ -152,7 +148,7 @@ namespace KHMemLibrary
         /// <param name="value">Valid values are 0, 30, 60 and 120</param>
         public void FPS(FPSValue value)
         {
-            WriteFloat(0x89E9D0, (int) value);
+            WriteFloat(0x89E9D0, (int)value);
         }
 
         /// <summary>
@@ -226,11 +222,10 @@ namespace KHMemLibrary
         public void Level(int value)
         {
             GetPID();
-            if (value > 99 || value < 0)
-            {
-                Console.WriteLine("[KHMemLibrary] Invalid level value.");
-                return;
-            }
+            if (value < 1)
+                value = 1;
+            if (value > 99)
+                value = 99;
 
             var EXPTable = new List<int>
             {
@@ -243,7 +238,7 @@ namespace KHMemLibrary
                 1909578, 1968378, 2027978, 2088378, 2149578, 2211578, 2274378, 2337978, 2402378, 2467578, 2533578,
                 2600378, 2667978, 2736378, 2805578, 2875578
             };
-            WriteInt(0x9AA750, EXPTable[value]);
+            WriteInt(0x9AA750 + 0x40, EXPTable[value - 1]);
             string level = value.ToString("X");
             memory.WriteMemory($"{process}+9A95AF", "byte", $"0x{level}");
         }
@@ -264,9 +259,9 @@ namespace KHMemLibrary
         public void ModifyWorldAvailability(WorldAvailability availability, WorldAvailability_Access access, int visits,
             WorldAvailability_Barrier barrier)
         {
-            WriteByte((int) availability, (byte) access);
-            WriteByte((int) availability + 1, (byte) visits);
-            WriteByte((int) availability + 3, (byte) barrier);
+            WriteByte((int)availability, (byte)access);
+            WriteByte((int)availability + 1, (byte)visits);
+            WriteByte((int)availability + 3, (byte)barrier);
         }
 
         /// <summary>
@@ -278,8 +273,8 @@ namespace KHMemLibrary
         /// <param name="spawn"></param>
         public void ModifyDestination(Destination origin, byte world, byte room, byte spawn)
         {
-            Write2Bytes((int) origin, world, room);
-            Write2Bytes((int) origin + 2, spawn, 0x00);
+            Write2Bytes((int)origin, world, room);
+            Write2Bytes((int)origin + 2, spawn, 0x00);
         }
 
         /// <summary>
@@ -288,8 +283,8 @@ namespace KHMemLibrary
         public void ModifyParty(PartyWorld world, PartyMember main, PartyMember first, PartyMember second,
             PartyMember third)
         {
-            Write2Bytes((int) world, (byte) main, (byte) first);
-            Write2Bytes((int) world + 2, (byte) second, (byte) third);
+            Write2Bytes((int)world, (byte)main, (byte)first);
+            Write2Bytes((int)world + 2, (byte)second, (byte)third);
         }
 
         /// <summary>
@@ -372,7 +367,7 @@ namespace KHMemLibrary
         public void FieldBGM(BGM bgm)
         {
             GetPID();
-            memory.WriteMemory($"{process}+AB8544", "int", $"{(int) bgm}");
+            memory.WriteMemory($"{process}+AB8544", "int", $"{(int)bgm}");
         }
 
         /// <summary>
@@ -382,7 +377,7 @@ namespace KHMemLibrary
         public void BattleBGM(BGM bgm)
         {
             GetPID();
-            memory.WriteMemory($"{process}+AB8554", "int", $"{(int) bgm}");
+            memory.WriteMemory($"{process}+AB8554", "int", $"{(int)bgm}");
         }
 
         /// <summary>
@@ -437,7 +432,7 @@ namespace KHMemLibrary
                 value = 255;
             if (value < 0)
                 value = 0;
-            memory.WriteMemory($"{process}+{(int) item:X8}", "byte", $"0x{value:X}");
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
         /// <summary>
@@ -450,7 +445,7 @@ namespace KHMemLibrary
                 value = 255;
             if (value < 0)
                 value = 0;
-            memory.WriteMemory($"{process}+{(int) item:X8}", "byte", $"0x{value:X}");
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
         /// <summary>
@@ -463,7 +458,7 @@ namespace KHMemLibrary
                 value = 255;
             if (value < 0)
                 value = 0;
-            memory.WriteMemory($"{process}+{(int) item:X8}", "byte", $"0x{value:X}");
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
         }
 
         #endregion
@@ -476,9 +471,9 @@ namespace KHMemLibrary
         public void AddAbility(AbilitySlot slot, Ability ability)
         {
             GetPID();
-            var byte1 = (byte) (((int) ability & 0xFF00) >> 8);
-            var byte2 = (byte) (((int) ability & 0x00FF));
-            memory.WriteMemory($"{process}+{(int) slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+            var byte1 = (byte)(((int)ability & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)ability & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         #region Add weapon
@@ -489,7 +484,7 @@ namespace KHMemLibrary
         public void AddWeaponSora(Keyblade item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{((int) item).ToString("X8")}", "byte", $"0x01");
+            memory.WriteMemory($"{process}+{((int)item).ToString("X8")}", "byte", $"0x01");
         }
 
         /// <summary>
@@ -498,7 +493,7 @@ namespace KHMemLibrary
         public void AddWeaponDonald(Staff item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{((int) item).ToString("X8")}", "byte", $"0x01");
+            memory.WriteMemory($"{process}+{((int)item).ToString("X8")}", "byte", $"0x01");
         }
 
         /// <summary>
@@ -507,7 +502,7 @@ namespace KHMemLibrary
         public void AddWeaponGoofy(Shield item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{(int) item:X8}", "byte", $"0x01");
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x01");
         }
 
         #endregion
@@ -520,7 +515,7 @@ namespace KHMemLibrary
         public void RemoveWeaponSora(Keyblade item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{(int) item:X8}", "byte", $"0x00");
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x00");
         }
 
         /// <summary>
@@ -529,7 +524,7 @@ namespace KHMemLibrary
         public void RemoveWeaponDonald(Staff item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{(int) item:X8}", "byte", $"0x00");
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x00");
         }
 
         /// <summary>
@@ -538,7 +533,7 @@ namespace KHMemLibrary
         public void RemoveWeaponGoofy(Shield item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+{(int) item:X8}", "byte", $"0x00");
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x00");
         }
 
         #endregion
@@ -551,7 +546,7 @@ namespace KHMemLibrary
         public void EquipWeaponSora(KeybladeID item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+9A95A0", "int", $"{(int) item}");
+            memory.WriteMemory($"{process}+9A95A0", "int", $"{(int)item}");
         }
 
         /// <summary>
@@ -560,7 +555,7 @@ namespace KHMemLibrary
         public void EquipWeaponDonald(StaffID item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+9A96B4", "int", $"{(int) item}");
+            memory.WriteMemory($"{process}+9A96B4", "int", $"{(int)item}");
         }
 
         /// <summary>
@@ -569,7 +564,7 @@ namespace KHMemLibrary
         public void EquipWeaponGoofy(ShieldID item)
         {
             GetPID();
-            memory.WriteMemory($"{process}+9A97C8", "int", $"{(int) item}");
+            memory.WriteMemory($"{process}+9A97C8", "int", $"{(int)item}");
         }
 
         #endregion
@@ -582,9 +577,9 @@ namespace KHMemLibrary
         public void EquipArmorSora(ArmorSlotSora slot, ArmorID armor)
         {
             GetPID();
-            var byte1 = (byte) (((int) armor & 0xFF00) >> 8);
-            var byte2 = (byte) (((int) armor & 0x00FF));
-            memory.WriteMemory($"{process}+{(int) slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+            var byte1 = (byte)(((int)armor & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)armor & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         /// <summary>
@@ -593,9 +588,9 @@ namespace KHMemLibrary
         public void EquipArmorDonald(ArmorSlotDonald slot, ArmorID armor)
         {
             GetPID();
-            var byte1 = (byte) (((int) armor & 0xFF00) >> 8);
-            var byte2 = (byte) (((int) armor & 0x00FF));
-            memory.WriteMemory($"{process}+{(int) slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+            var byte1 = (byte)(((int)armor & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)armor & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         /// <summary>
@@ -604,9 +599,9 @@ namespace KHMemLibrary
         public void EquipArmorGoofy(ArmorSlotGoofy slot, ArmorID armor)
         {
             GetPID();
-            var byte1 = (byte) (((int) armor & 0xFF00) >> 8);
-            var byte2 = (byte) (((int) armor & 0x00FF));
-            memory.WriteMemory($"{process}+{(int) slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+            var byte1 = (byte)(((int)armor & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)armor & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         #endregion
@@ -619,9 +614,9 @@ namespace KHMemLibrary
         public void EquipAccessorySora(AccessorySlotSora slot, AccessoryID accessory)
         {
             GetPID();
-            var byte1 = (byte) (((int) accessory & 0xFF00) >> 8);
-            var byte2 = (byte) (((int) accessory & 0x00FF));
-            memory.WriteMemory($"{process}+{(int) slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+            var byte1 = (byte)(((int)accessory & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)accessory & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         /// <summary>
@@ -630,9 +625,9 @@ namespace KHMemLibrary
         public void EquipAccessoryDonald(AccessorySlotDonald slot, AccessoryID accessory)
         {
             GetPID();
-            var byte1 = (byte) (((int) accessory & 0xFF00) >> 8);
-            var byte2 = (byte) (((int) accessory & 0x00FF));
-            memory.WriteMemory($"{process}+{(int) slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+            var byte1 = (byte)(((int)accessory & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)accessory & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         /// <summary>
@@ -641,9 +636,9 @@ namespace KHMemLibrary
         public void EquipAccessoryGoofy(AccessorySlotGoofy slot, AccessoryID accessory)
         {
             GetPID();
-            var byte1 = (byte) (((int) accessory & 0xFF00) >> 8);
-            var byte2 = (byte) (((int) accessory & 0x00FF));
-            memory.WriteMemory($"{process}+{(int) slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+            var byte1 = (byte)(((int)accessory & 0xFF00) >> 8);
+            var byte2 = (byte)(((int)accessory & 0x00FF));
+            memory.WriteMemory($"{process}+{(int)slot:X8}", "bytes", $"0x{byte1:X} 0x{byte2:X}");
         }
 
         #endregion
