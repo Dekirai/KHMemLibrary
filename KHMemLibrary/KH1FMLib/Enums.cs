@@ -6,6 +6,29 @@ using System.Threading.Tasks;
 
 namespace KHMemLibrary.KH1FMLib
 {
+    /// <summary>
+    /// Set the FPS from the PC exclusive settings menu from anywhere.
+    /// </summary>
+    public enum FPSValue
+    {
+        /// <summary>
+        /// Unlocks the FPS.
+        /// </summary>
+        Unlimited = 0,
+        /// <summary>
+        /// Limits the FPS to 30 FPS.
+        /// </summary>
+        FPS30 = 30,
+        /// <summary>
+        /// Limits the FPS to 60 FPS.
+        /// </summary>
+        FPS60 = 60,
+        /// <summary>
+        /// Limits the FPS to 120 FPS.
+        /// </summary>
+        FPS120 = 120
+    }
+
     public enum Keyblade
     {
         KingdomKey = 0x2DE5EBA,
@@ -49,5 +72,22 @@ namespace KHMemLibrary.KH1FMLib
         Neverland = 13,
         HollowBastion = 15,
         EndOfTheWorld = 16
+    }
+
+    public enum Consumable
+    {
+        Potion = 0x2DE5E6A,
+        HiPotion = 0x2DE5E6B,
+        Ether = 0x2DE5E6C,
+        Elixir = 0x2DE5E6D,
+        MegaPotion = 0x2DE5E6F,
+        MegaEther = 0x2DE5E70,
+        MegaElixir = 0x2DE5E71,
+        Tent = 0x2DE5EF7,
+        CampingSet = 0x2DE5EF8,
+        Cottage = 0x2DE5EF9,
+        PowerUp = 0x2DE5F01,
+        DefenseUp = 0x2DE5F02,
+        APUp = 0x2DE5F03
     }
 }

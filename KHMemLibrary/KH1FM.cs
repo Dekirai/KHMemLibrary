@@ -227,5 +227,86 @@ namespace KHMemLibrary
             float FPS = memory.ReadFloat($"{process}+22B72B0");
             return FPS;
         }
+
+        /// <summary>
+        /// Change the amount of munny you currently have. Maximum is 99999.
+        /// </summary>
+        /// <param name="value"></param>
+        public void Munny(int value)
+        {
+            if (value > 99999)
+                value = 99999;
+            if (value < 0)
+                value = 0;
+            WriteInt(0x2DFBDEC, value);
+        }
+
+        /// <summary>
+        /// Change the FPS from the PC exclusive settings menu temporarily.
+        /// </summary>
+        /// <param name="value">Valid values are 0, 30, 60 and 120</param>
+        public void FPS(FPSValue value)
+        {
+            WriteFloat(0x22B72B0, (float)value);
+        }
+
+        /// <summary>
+        /// Obtain a weapon in your inventory for Sora.
+        /// </summary>
+        public void AddWeaponSora(Keyblade item)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+{((int)item).ToString("X8")}", "byte", $"0x01");
+        }
+
+        /// <summary>
+        /// Modifies the stock of consumables. Maximum is 255.
+        /// </summary>
+        public void ModifyConsumable(Consumable item, int value)
+        {
+            GetPID();
+            if (value > 255)
+                value = 255;
+            if (value < 0)
+                value = 0;
+            memory.WriteMemory($"{process}+{(int)item:X8}", "byte", $"0x{value:X}");
+        }
+
+        /// <summary>
+        /// Kicks you back to the title screen.
+        /// </summary>
+        public void SoftReset()
+        {
+            WriteByte(0x22E86E0, 0x01);
+            WriteByte(0x22E86DC, 0x02);
+            WriteByte(0x233C240, 0x01);
+        }
+
+        /// <summary>
+        /// Change the coordinate of Sora's X position.
+        /// </summary>
+        public void CoordX(float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+023ED050,0x10", "float", $"{value}");
+        }
+
+        /// <summary>
+        /// Change the coordinate of Sora's Y position.
+        /// </summary>
+        public void CoordY(float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+023ED050,0x14", "float", $"{value}");
+        }
+
+        /// <summary>
+        /// Change the coordinate of Sora's Z position.
+        /// </summary>
+        public void CoordZ(float value)
+        {
+            GetPID();
+            memory.WriteMemory($"{process}+023ED050,0x18", "float", $"{value}");
+        }
     }
 }

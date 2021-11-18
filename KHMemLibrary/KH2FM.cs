@@ -728,6 +728,16 @@ namespace KHMemLibrary
             return result;
         }
 
+        // <summary>
+        /// Returns the playtime in total seconds as an int.
+        /// </summary>
+        public int FetchPlayTime()
+        {
+            int time = ReadInt(0x9A94F4);
+            int result = time / 60;
+            return result;
+        }
+
         /// <summary>
         /// Returns the current difficulty as a plain text.
         /// </summary>
