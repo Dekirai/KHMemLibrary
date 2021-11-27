@@ -120,6 +120,27 @@ namespace KHMemLibrary
         }
 
         /// <summary>
+        /// Change the multiplier of experience you gain.
+        /// </summary>
+        /// <param name="value">Default is 1</param>
+        public void EXPMultiplier(float value)
+        {
+            WriteFloat(0x2A1C28, value);
+        }
+
+        /// <summary>
+        /// Enable warp for the current session.
+        /// </summary>
+        public void EnableWarp(bool value)
+        {
+            if (value == true)
+                Write2Bytes(0x2082FF, 0x90, 0x90);
+            else if (value == false)
+                Write2Bytes(0x2082FF, 0x76, 0x0A);
+            else Console.WriteLine("[KH1FM - EnableWarp] Invalid bool value");
+        }
+
+        /// <summary>
         /// Trigger a custom warp.
         /// </summary>
         /// <param name="world"></param>

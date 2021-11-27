@@ -55,7 +55,7 @@
         TheWorldThatNeverWas = 0x9AB0A4 + 0x40
     }
 
-    public enum WorldAvailability_Access
+    public enum State
     {
         Invisible = 0,
         Locked = 1,
@@ -66,10 +66,10 @@
         Special = 3
     }
 
-    public enum WorldAvailability_Barrier
+    public enum BarrierState
     {
         NoBarrier = 0,
-        NoBarrierWithSparkles = 1,
+        Sparkles = 1,
         Barrier = 2
     }
 
@@ -870,7 +870,7 @@
 
     public enum Accessory
     {
-        AbililityRing = 0x9AA5F7 + 0x40,
+        AbilityRing = 0x9AA5F7 + 0x40,
         EngineerRing = 0x9AA5F8 + 0x40,
         TechnicianRing = 0x9AA5F9 + 0x40,
         ExpertRing = 0x9AA5FA + 0x40,

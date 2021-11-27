@@ -257,10 +257,10 @@ namespace KHMemLibrary
             WriteInt(0x9AB209, value);
         }
 
-        public void ModifyWorldAvailability(WorldAvailability availability, WorldAvailability_Access access, int visits,
-            WorldAvailability_Barrier barrier)
+        public void ModifyWorldAvailability(WorldAvailability availability, State state, int visits,
+            BarrierState barrier)
         {
-            WriteByte((int)availability, (byte)access);
+            WriteByte((int)availability, (byte)state);
             WriteByte((int)availability + 1, (byte)visits);
             WriteByte((int)availability + 3, (byte)barrier);
         }
