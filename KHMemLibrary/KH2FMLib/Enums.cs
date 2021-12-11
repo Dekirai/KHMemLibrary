@@ -39,7 +39,7 @@
         HT_DrFinklesteinsLab = 0x2AABCF0 + 0x40
     }
 
-    public enum WorldAvailability
+    public enum WorldStatus
     {
         TwilightTown = 0x9AB064 + 0x40,
         HollowBastion = 0x9AB06C + 0x40,

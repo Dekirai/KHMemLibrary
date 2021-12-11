@@ -144,11 +144,11 @@ namespace KHMemLibrary
 
         /// <summary>
         /// Change the FPS from the PC exclusive settings menu temporarily.
+        /// Valid values are 0, 30, 60 and 120
         /// </summary>
-        /// <param name="value">Valid values are 0, 30, 60 and 120</param>
-        public void FPS(FPSValue value)
+        public void FPS(float value)
         {
-            WriteFloat(0x89E9D0, (float)value);
+            WriteFloat(0x89E9D0, value);
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Warp to a custom area. Works best when using a timer or similar to spam it while entering a new room.
+        /// Warp to a custom area. Often leads to a softlock that forces you to restart the game.
         /// </summary>
         /// <param name="WorldID"></param>
         /// <param name="RoomID"></param>
@@ -192,12 +192,12 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Warp to a specific Event. Works best when using a timer or similar to spam it while entering a new room.
+        /// Warp to a specific Event. Often leads to a softlock that forces you to restart the game.
         /// </summary>
         /// <param name="WorldID"></param>
         /// <param name="RoomID"></param>
         /// <param name="EventID"></param>
-        public void Event(byte WorldID, byte RoomID, byte EventID)
+        public void WarpEvent(byte WorldID, byte RoomID, byte EventID)
         {
             WriteByte(0x714DB8, WorldID);
             WriteByte(0x714DB9, RoomID);
@@ -218,6 +218,7 @@ namespace KHMemLibrary
 
         /// <summary>
         /// Modifies your current total EXP to the entered Level.
+        /// Takes affect after defeating an enemy.
         /// </summary>
         /// <param name="value"></param>
         public void Level(int value)
@@ -245,10 +246,11 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Sets the current world map barrier. Minimum is 0 and maximum is 22.
+        /// Sets the current world map fly range.
+        /// Minimum is 0 and maximum is 22.
         /// </summary>
         /// <param name="value"></param>
-        public void WorldBarrier(int value)
+        public void WorldMapRange(int value)
         {
             if (value > 22)
                 value = 22;
@@ -257,12 +259,12 @@ namespace KHMemLibrary
             WriteInt(0x9AB209, value);
         }
 
-        public void ModifyWorldAvailability(WorldAvailability availability, State state, int visits,
+        public void ModifyWorldStatus(WorldStatus status, State state, int visits,
             BarrierState barrier)
         {
-            WriteByte((int)availability, (byte)state);
-            WriteByte((int)availability + 1, (byte)visits);
-            WriteByte((int)availability + 3, (byte)barrier);
+            WriteByte((int)status, (byte)state);
+            WriteByte((int)status + 1, (byte)visits);
+            WriteByte((int)status + 3, (byte)barrier);
         }
 
         /// <summary>
@@ -338,7 +340,7 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Refills Sora's MP to his current max MP. Also resets the MP gauge if it's on cooldown.
+        /// Refills Sora's/Roxas' MP to his current max MP. Also resets the MP gauge if it's on cooldown.
         /// </summary>
         public void RefillMP()
         {
@@ -651,7 +653,7 @@ namespace KHMemLibrary
         #region Read from memory
 
         /// <summary>
-        /// Checks if a Map is loaded or not. Useful for Warp and Event.
+        /// Checks if a Map is loaded or not.
         /// </summary>
         public bool isMapLoaded()
         {
@@ -704,7 +706,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current ID of the World you are currently in as an int.
         /// </summary>
-        public int FetchWorldID()
+        public int GetWorldID()
         {
             int result = ReadByte(0x714DB8);
             return result;
@@ -713,7 +715,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns your current FPS from the PC exclusive settings menu.
         /// </summary>
-        public float FetchFPS()
+        public float GetFPS()
         {
             float FPS = memory.ReadFloat($"{process}+89E9D0");
             return FPS;
@@ -722,7 +724,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current ID of the Room you are currently in as an int.
         /// </summary>
-        public int FetchRoomID()
+        public int GetRoomID()
         {
             int result = ReadByte(0x714DB9);
             return result;
@@ -731,7 +733,7 @@ namespace KHMemLibrary
         // <summary>
         /// Returns the playtime in total seconds as an int.
         /// </summary>
-        public int FetchPlayTime()
+        public int GetPlayTime()
         {
             int time = ReadInt(0x9A94F4);
             int result = time / 60;
@@ -742,7 +744,7 @@ namespace KHMemLibrary
         /// Returns the current difficulty as a plain text.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> FetchDifficultyText()
+        public async Task<string> GetDifficultyText()
         {
             int difficulty_get = ReadByte(0x9A9508 + 0x40);
             var difficulty_fetch = await Difficulties.GetDifficulty(difficulty_get);
@@ -754,7 +756,7 @@ namespace KHMemLibrary
         /// Returns the current ID of the difficulty you are playing as an int.
         /// </summary>
         /// <returns></returns>
-        public int FetchDifficultyID()
+        public int GetDifficultyID()
         {
             int difficultyid = ReadByte(0x9A9508 + 0x40);
             return difficultyid;
@@ -763,7 +765,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current ID of the spawn point as a hex value.
         /// </summary>
-        public int FetchSpawnID()
+        public int GetSpawnID()
         {
             int result = ReadByte(0x714DBA);
             return result;
@@ -772,7 +774,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current IDs of the Event you are currently in as a hex string.
         /// </summary>
-        public string FetchEventID()
+        public string GetEventID()
         {
             int event1 = ReadByte(0x714DBC);
             int event2 = ReadByte(0x714DBE);
@@ -785,7 +787,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current World as a plain text.
         /// </summary>
-        public async Task<string> FetchWorldText()
+        public async Task<string> GetWorldText()
         {
             int world_get = ReadByte(0x714DB8);
             var world_fetch = await Worlds.GetWorld(world_get);
@@ -796,7 +798,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current Room as a plain text.
         /// </summary>
-        public async Task<string> FetchRoomText()
+        public async Task<string> GetRoomText()
         {
             int world_get = ReadByte(0x714DB8);
             var world_fetch = await Worlds.GetWorld(world_get);
@@ -809,7 +811,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current BGM ID used in fields.
         /// </summary>
-        public int FetchFieldBGM()
+        public int GetFieldBGM()
         {
             GetPID();
             int BGM = ReadByte(0xAB8504 + 0x40);
@@ -819,7 +821,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current BGM ID used in battles.
         /// </summary>
-        public int FetchBattleBGM()
+        public int GetBattleBGM()
         {
             GetPID();
             int BGM = ReadByte(0xAB8514 + 0x40);
@@ -829,7 +831,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current amount of munny you have.
         /// </summary>
-        public int FetchMunny()
+        public int GetMunny()
         {
             GetPID();
             int munny = ReadInt(0x9A94B0 + 0x40);
@@ -839,7 +841,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current X coordinate of Sora/Roxas.
         /// </summary>
-        public float FetchCoordX()
+        public float GetCoordX()
         {
             GetPID();
             float coordX = memory.ReadFloat($"{process}+02A0E8A0,0x670");
@@ -849,7 +851,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current Y coordinate of Sora/Roxas.
         /// </summary>
-        public float FetchCoordY()
+        public float GetCoordY()
         {
             GetPID();
             float coordY = memory.ReadFloat($"{process}+02A0E8A0,0x674");
@@ -859,7 +861,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current Z coordinate of Sora/Roxas.
         /// </summary>
-        public float FetchCoordZ()
+        public float GetCoordZ()
         {
             GetPID();
             float coordZ = memory.ReadFloat($"{process}+02A0E8A0,0x678");

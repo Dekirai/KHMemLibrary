@@ -169,7 +169,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current ID of the World you are currently in as an int.
         /// </summary>
-        public int FetchWorldID()
+        public int GetWorldID()
         {
             int result = ReadByte(0x233CADC);
             return result;
@@ -178,7 +178,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current ID of the Room you are currently in as an int.
         /// </summary>
-        public int FetchRoomID()
+        public int GetRoomID()
         {
             int result = ReadByte(0x233CB44);
             return result;
@@ -187,24 +187,24 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current World as a plain text.
         /// </summary>
-        public async Task<string> FetchWorldText()
+        public async Task<string> GetWorldText()
         {
             int world_get = ReadByte(0x233CADC);
-            var world_fetch = await Worlds.GetWorld(world_get);
-            string world = world_fetch[0];
+            var world_Get = await Worlds.GetWorld(world_get);
+            string world = world_Get[0];
             return world;
         }
 
         /// <summary>
         /// Returns the current Room as a plain text.
         /// </summary>
-        public async Task<string> FetchRoomText()
+        public async Task<string> GetRoomText()
         {
             int world_get = ReadByte(0x233CADC);
-            var world_fetch = await Worlds.GetWorld(world_get);
+            var world_Get = await Worlds.GetWorld(world_get);
             int room_get = ReadByte(0x233CB44);
-            var room_fetch = await Rooms.GetRoom(world_fetch[0]);
-            string room = room_fetch[room_get];
+            var room_Get = await Rooms.GetRoom(world_Get[0]);
+            string room = room_Get[room_get];
             return room;
         }
 
@@ -212,11 +212,11 @@ namespace KHMemLibrary
         /// Returns the current difficulty as a plain text.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> FetchDifficultyText()
+        public async Task<string> GetDifficultyText()
         {
             int difficulty_get = ReadByte(0x2DFBDFC);
-            var difficulty_fetch = await Difficulties.GetDifficulty(difficulty_get);
-            string difficulty = difficulty_fetch[0];
+            var difficulty_Get = await Difficulties.GetDifficulty(difficulty_get);
+            string difficulty = difficulty_Get[0];
             return difficulty;
         }
 
@@ -224,7 +224,7 @@ namespace KHMemLibrary
         /// Returns the current ID of the difficulty you are playing as an int.
         /// </summary>
         /// <returns></returns>
-        public int FetchDifficultyID()
+        public int GetDifficultyID()
         {
             int difficultyid = ReadByte(0x2DFBDFC);
             return difficultyid;
@@ -233,7 +233,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns the current amount of munny you have.
         /// </summary>
-        public int FetchMunny()
+        public int GetMunny()
         {
             GetPID();
             int munny = ReadInt(0x2DFBDEC);
@@ -243,7 +243,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Returns your current FPS from the PC exclusive settings menu.
         /// </summary>
-        public float FetchFPS()
+        public float GetFPS()
         {
             float FPS = memory.ReadFloat($"{process}+22B72B0");
             return FPS;
@@ -264,11 +264,11 @@ namespace KHMemLibrary
 
         /// <summary>
         /// Change the FPS from the PC exclusive settings menu temporarily.
+        /// Valid values are 0, 30, 60 and 120
         /// </summary>
-        /// <param name="value">Valid values are 0, 30, 60 and 120</param>
-        public void FPS(FPSValue value)
+        public void FPS(float value)
         {
-            WriteFloat(0x22B72B0, (float)value);
+            WriteFloat(0x22B72B0, value);
         }
 
         /// <summary>
