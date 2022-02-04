@@ -7,7 +7,6 @@ namespace KHMemLibrary
     {
         Mem memory = new Mem();
         string process = "KINGDOM HEARTS II FINAL MIX.exe";
-        bool isTriggered = false;
 
         private void GetPID()
         {
@@ -173,26 +172,6 @@ namespace KHMemLibrary
             WriteByte(0x2A0D3A4, 0x10);
         }
 
-        //public void Warp(byte WorldID, byte RoomID, byte SpawnID, byte Event1ID, byte Event2ID, byte Event3ID)
-        //{
-        //    WriteByte(0x714DB8, WorldID);
-        //    WriteByte(0x714DB9, RoomID);
-        //    WriteByte(0x714DBA, SpawnID);
-        //    WriteByte(0x714DBC, Event1ID);
-        //    WriteByte(0x714DBE, Event2ID);
-        //    WriteByte(0x714DC0, Event3ID);
-        //}
-
-        //public void WarpEvent(byte WorldID, byte RoomID, byte EventID)
-        //{
-        //    WriteByte(0x714DB8, WorldID);
-        //    WriteByte(0x714DB9, RoomID);
-        //    WriteByte(0x714DBC, EventID);
-        //    WriteByte(0x714DBE, EventID);
-        //    WriteByte(0x714DC0, EventID);
-        //    WriteByte(0x714DBA, 0x00);
-        //}
-
         /// <summary>
         /// Kicks you back to the Titlescreen.
         /// </summary>
@@ -341,77 +320,6 @@ namespace KHMemLibrary
             GetPID();
             memory.WriteMemory($"{process}+2A20E49", "byte", $"{memory.ReadByte($"{process}+2A20E4A")}");
             memory.WriteMemory($"{process}+2A20E48", "byte", "0x63");
-        }
-
-        #endregion
-
-        #region BGM
-
-        /// <summary>
-        /// Sets a new BGM for the fields. Takes effect after switching areas.
-        /// </summary>
-        /// <param name="bgm">BGM ID</param>
-        public void FieldBGM(BGM bgm)
-        {
-            GetPID();
-            isTriggered = true;
-            while (isTriggered)
-            {
-                int check = ReadByte(0x9B80D0);
-                if (check == 0)
-                {
-                    memory.FreezeValue($"{process}+AB8544", "int", $"{(int)bgm}");
-                }
-                memory.UnfreezeValue($"{process}+AB8544");
-                isTriggered = false;
-            }
-        }
-
-        /// <summary>
-        /// Sets a new BGM for the battles. Takes effect after switching areas.
-        /// </summary>
-        /// <param name="bgm">BGM ID</param>
-        public void BattleBGM(BGM bgm)
-        {
-            WriteInt(0xAB8554, (int)bgm);
-        }
-
-        /// <summary>
-        /// Shuffles the BGM for fields.
-        /// </summary>
-        public void RandomizeFieldBGM()
-        {
-            var random = new Random();
-            var list = new List<int>
-            {
-                50, 51, 52, 53, 54, 55, 59, 60, 61, 62, 63, 65, 66, 67, 68, 69, 81, 82, 84, 85, 86, 87, 88, 89, 90, 91,
-                92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 106, 107, 108, 109, 110, 111, 112, 113, 114,
-                115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136,
-                137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 148, 149, 151, 152, 153, 154, 155, 158, 159, 164, 185,
-                186, 187, 188, 189, 190
-            };
-            int index = random.Next(list.Count);
-            GetPID();
-            WriteInt(0xAB8544, index);
-        }
-
-        /// <summary>
-        /// Shuffles the BGM for battles.
-        /// </summary>
-        public void RandomizeBattleBGM()
-        {
-            var random = new Random();
-            var list = new List<int>
-            {
-                50, 51, 52, 53, 54, 55, 59, 60, 61, 62, 63, 65, 66, 67, 68, 69, 81, 82, 84, 85, 86, 87, 88, 89, 90, 91,
-                92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 106, 107, 108, 109, 110, 111, 112, 113, 114,
-                115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136,
-                137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 148, 149, 151, 152, 153, 154, 155, 158, 159, 164, 185,
-                186, 187, 188, 189, 190
-            };
-            int index = random.Next(list.Count);
-            GetPID();
-            memory.WriteMemory($"{process}+AB8554", "int", $"{index}");
         }
 
         #endregion
