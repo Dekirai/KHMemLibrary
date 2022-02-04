@@ -23,6 +23,27 @@
         FPS120 = 120
     }
 
+    public enum Buttons
+    {
+        L2 = 0x0001,
+        R2 = 0x0002,
+        L1 = 0x0004,
+        R1 = 0x0008,
+        TRIANGLE = 0x0010,
+        CIRCLE = 0x0020,
+        CROSS = 0x0040,
+        SQUARE = 0x0080,
+        SELECT = 0x0100,
+        L3 = 0x0200,
+        R3 = 0x0400,
+        START = 0x0800,
+        UP = 0x1000,
+        RIGHT = 0x2000,
+        DOWN = 0x4000,
+        LEFT = 0x8000
+
+    }
+
     public enum Destination
     {
         TT_TheUsualSpot = 0x2AABCFC + 0x40,

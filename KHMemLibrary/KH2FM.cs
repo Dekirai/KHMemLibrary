@@ -7,6 +7,7 @@ namespace KHMemLibrary
     {
         Mem memory = new Mem();
         string process = "KINGDOM HEARTS II FINAL MIX.exe";
+        bool isTriggered = false;
 
         private void GetPID()
         {
@@ -172,40 +173,25 @@ namespace KHMemLibrary
             WriteByte(0x2A0D3A4, 0x10);
         }
 
-        /// <summary>
-        /// Warp to a custom area. Often leads to a softlock that forces you to restart the game.
-        /// </summary>
-        /// <param name="WorldID"></param>
-        /// <param name="RoomID"></param>
-        /// <param name="SpawnID"></param>
-        /// <param name="Event1ID"></param>
-        /// <param name="Event2ID"></param>
-        /// <param name="Event3ID"></param>
-        public void Warp(byte WorldID, byte RoomID, byte SpawnID, byte Event1ID, byte Event2ID, byte Event3ID)
-        {
-            WriteByte(0x714DB8, WorldID);
-            WriteByte(0x714DB9, RoomID);
-            WriteByte(0x714DBA, SpawnID);
-            WriteByte(0x714DBC, Event1ID);
-            WriteByte(0x714DBE, Event2ID);
-            WriteByte(0x714DC0, Event3ID);
-        }
+        //public void Warp(byte WorldID, byte RoomID, byte SpawnID, byte Event1ID, byte Event2ID, byte Event3ID)
+        //{
+        //    WriteByte(0x714DB8, WorldID);
+        //    WriteByte(0x714DB9, RoomID);
+        //    WriteByte(0x714DBA, SpawnID);
+        //    WriteByte(0x714DBC, Event1ID);
+        //    WriteByte(0x714DBE, Event2ID);
+        //    WriteByte(0x714DC0, Event3ID);
+        //}
 
-        /// <summary>
-        /// Warp to a specific Event. Often leads to a softlock that forces you to restart the game.
-        /// </summary>
-        /// <param name="WorldID"></param>
-        /// <param name="RoomID"></param>
-        /// <param name="EventID"></param>
-        public void WarpEvent(byte WorldID, byte RoomID, byte EventID)
-        {
-            WriteByte(0x714DB8, WorldID);
-            WriteByte(0x714DB9, RoomID);
-            WriteByte(0x714DBC, EventID);
-            WriteByte(0x714DBE, EventID);
-            WriteByte(0x714DC0, EventID);
-            WriteByte(0x714DBA, 0x00);
-        }
+        //public void WarpEvent(byte WorldID, byte RoomID, byte EventID)
+        //{
+        //    WriteByte(0x714DB8, WorldID);
+        //    WriteByte(0x714DB9, RoomID);
+        //    WriteByte(0x714DBC, EventID);
+        //    WriteByte(0x714DBE, EventID);
+        //    WriteByte(0x714DC0, EventID);
+        //    WriteByte(0x714DBA, 0x00);
+        //}
 
         /// <summary>
         /// Kicks you back to the Titlescreen.
@@ -259,8 +245,7 @@ namespace KHMemLibrary
             WriteInt(0x9AB209, value);
         }
 
-        public void ModifyWorldStatus(WorldStatus status, State state, int visits,
-            BarrierState barrier)
+        public void ModifyWorldStatus(WorldStatus status, State state, int visits, BarrierState barrier)
         {
             WriteByte((int)status, (byte)state);
             WriteByte((int)status + 1, (byte)visits);
@@ -283,8 +268,7 @@ namespace KHMemLibrary
         /// <summary>
         /// Modifies the party in different worlds.
         /// </summary>
-        public void ModifyParty(PartyWorld world, PartyMember main, PartyMember first, PartyMember second,
-            PartyMember third)
+        public void ModifyParty(PartyWorld world, PartyMember main, PartyMember first, PartyMember second, PartyMember third)
         {
             Write2Bytes((int)world, (byte)main, (byte)first);
             Write2Bytes((int)world + 2, (byte)second, (byte)third);
@@ -370,7 +354,17 @@ namespace KHMemLibrary
         public void FieldBGM(BGM bgm)
         {
             GetPID();
-            memory.WriteMemory($"{process}+AB8544", "int", $"{(int)bgm}");
+            isTriggered = true;
+            while (isTriggered)
+            {
+                int check = ReadByte(0x9B80D0);
+                if (check == 0)
+                {
+                    memory.FreezeValue($"{process}+AB8544", "int", $"{(int)bgm}");
+                }
+                memory.UnfreezeValue($"{process}+AB8544");
+                isTriggered = false;
+            }
         }
 
         /// <summary>
@@ -379,8 +373,7 @@ namespace KHMemLibrary
         /// <param name="bgm">BGM ID</param>
         public void BattleBGM(BGM bgm)
         {
-            GetPID();
-            memory.WriteMemory($"{process}+AB8554", "int", $"{(int)bgm}");
+            WriteInt(0xAB8554, (int)bgm);
         }
 
         /// <summary>
@@ -399,7 +392,7 @@ namespace KHMemLibrary
             };
             int index = random.Next(list.Count);
             GetPID();
-            memory.WriteMemory($"{process}+AB8544", "int", $"{index}");
+            WriteInt(0xAB8544, index);
         }
 
         /// <summary>
@@ -813,7 +806,6 @@ namespace KHMemLibrary
         /// </summary>
         public int GetFieldBGM()
         {
-            GetPID();
             int BGM = ReadByte(0xAB8504 + 0x40);
             return BGM;
         }
@@ -823,7 +815,6 @@ namespace KHMemLibrary
         /// </summary>
         public int GetBattleBGM()
         {
-            GetPID();
             int BGM = ReadByte(0xAB8514 + 0x40);
             return BGM;
         }
@@ -833,7 +824,6 @@ namespace KHMemLibrary
         /// </summary>
         public int GetMunny()
         {
-            GetPID();
             int munny = ReadInt(0x9A94B0 + 0x40);
             return munny;
         }
@@ -866,6 +856,16 @@ namespace KHMemLibrary
             GetPID();
             float coordZ = memory.ReadFloat($"{process}+02A0E8A0,0x678");
             return coordZ;
+        }
+
+        /// <summary>
+        /// Reads the buttons that are currently being pressed.
+        /// </summary>
+        public int ButtonsPressed()
+        {
+            GetPID();
+            int buttons = memory.Read2Byte($"{process}+711489");
+            return buttons;
         }
 
         #endregion
