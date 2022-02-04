@@ -1,18 +1,15 @@
-
-
 # KHMemLibrary
  A memory library for various Kingdom Hearts games on PC.
 
 ## First words
-Please note that this project is still in it's early stage and far from being done.</br>
 I try to make this library as userfriendly as possible, so even a newbie can work with it!</br>
 For a complete library breakdown, don't mind to look at the [Wiki](https://github.com/Dekirai/KHMemLibrary/wiki).
 
 ## Requirements
 
  - Kingdom Hearts 1 or Kingdom Hearts 2 on your PC
- - Visual Studio 2022 (Recommended)
- - [.NET 6](https://dotnet.microsoft.com/download/dotnet) or greater
+ - Visual Studio 2022
+ - [.NET 6](https://dotnet.microsoft.com/download/dotnet)
 
 ## How to install the library
 
@@ -44,9 +41,9 @@ For a complete library breakdown, don't mind to look at the [Wiki](https://githu
 ## Credits
 Huge thanks to anyone that contributed to the Library in any way or I took advantage of.</br>
 
- - Denho (denho#3759)
- - TopazTK (TopazTK#5514, [GitHub](https://github.com/Topaz-Reality))
- - 1234567890num (1234567890num#6827, [GitHub](https://github.com/1234567890num))
+ - ([Denhonator](https://github.com/Denhonator))
+ - ([TopazTK](https://github.com/TopazTK))
+ - ([1234567890num](https://github.com/1234567890num))
 
 ## Packages used to make it work
 
