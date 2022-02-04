@@ -41,9 +41,9 @@ For a complete library breakdown, don't mind to look at the [Wiki](https://githu
 ## Credits
 Huge thanks to anyone that contributed to the Library in any way or I took advantage of.</br>
 
- - ([Denhonator](https://github.com/Denhonator))
- - ([TopazTK](https://github.com/TopazTK))
- - ([1234567890num](https://github.com/1234567890num))
+ - [Denhonator](https://github.com/Denhonator)
+ - [TopazTK](https://github.com/TopazTK)
+ - [1234567890num](https://github.com/1234567890num)
 
 ## Packages used to make it work
 
