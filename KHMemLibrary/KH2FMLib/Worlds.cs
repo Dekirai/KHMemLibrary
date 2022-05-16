@@ -81,7 +81,7 @@
                     getworld.Add("twtnw");
                     break;
                 case 255:
-                    getworld.Add("Main Menu");
+                    getworld.Add("Title screen");
                     getworld.Add("logo");
                     break;
                 default:

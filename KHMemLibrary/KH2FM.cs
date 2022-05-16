@@ -281,7 +281,8 @@ namespace KHMemLibrary
         }
 
         /// <summary>
-        /// Adds an ability to a slot of your choice.
+        /// You can modify Sora's UCM.
+        /// Useful if you want to play as Roxas, Mickey etc.
         /// </summary>
         public void PlayerUCM(UCMID ucmid)
         {
@@ -289,6 +290,21 @@ namespace KHMemLibrary
             var byte1 = (byte)(((int)ucmid & 0xFF00) >> 8);
             var byte2 = (byte)(((int)ucmid & 0x00FF));
             memory.WriteMemory($"{process}+0x2A6F658", "bytes", $"0x{byte1:X} 0x{byte2:X}");
+        }
+
+        /// <summary>
+        /// Allows to transform into Valor, Wisdom, Limit, Master, Final or Anti.
+        /// Requires a Keyblade to be equiped on Valor, Master or Final or else the game will crash.
+        /// </summary>
+        /// <param name="drive"></param>
+        public void ForceDrive(Drive drive)
+        {
+            GetPID();
+            memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+2A5A096", "bytes", "0x05 0x00 0x01 0x00"); //Revert incase we are in a form already
+            Thread.Sleep(400);
+            memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+2A5A096", "bytes", $"0x04 0x00 0x0{(int)drive} 0x00");
+            Thread.Sleep(400);
+            memory.WriteMemory("KINGDOM HEARTS II FINAL MIX.exe+2A5A096", "bytes", "0x00 0x00 0x00 0x00");
         }
 
         #region Refills

@@ -336,8 +336,9 @@
                     getroom.Add("The Dark Margin");
                     break;
 
-                case "Main Menu":
-                    getroom.Add("Main Menu");
+                case "Title screen":
+                    getroom.Add("Title screen");
+                    getroom.Add("Title screen");
                     break;
             }
             return getroom.ToArray();
