@@ -21,7 +21,7 @@
                     getworld.Add("twilighttown");
                     break;
                 case 4:
-                    getworld.Add("Hollow Bastion/Radiant Garden");
+                    getworld.Add("Hollow Bastion");
                     getworld.Add("hollowbastion");
                     break;
                 case 5:

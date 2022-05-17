@@ -57,7 +57,7 @@
                     getroom.Add("The Old Mansion");
                     break;
 
-                case "Hollow Bastion/Radiant Garden":
+                case "Hollow Bastion":
                     getroom.Add("Villain's Vale");
                     getroom.Add("The Dark Depths");
                     getroom.Add("The Great Maw");
